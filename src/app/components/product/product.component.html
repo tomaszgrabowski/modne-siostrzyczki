@@ -1,6 +1,5 @@
-<div class="card" style="width: 12rem;">
-    <!-- <img class="card-img-top" [src]="product.photos.url" [alt]="product.name"> -->
-    <img product-thumbnail images="product.photos"/>
+<div class="card" style="width: 12rem;" (click)="navigateToProduct(product)">
+    <img app-product-thumbnail [items]="product.photos"/>
     <div class="card-body">
       <h5 class="card-title">{{product.name}}</h5>
     </div>

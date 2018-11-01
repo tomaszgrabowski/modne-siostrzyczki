@@ -1,10 +1,21 @@
-import { Directive } from '@angular/core';
+import { Directive, Input, OnInit, HostBinding } from "@angular/core";
+import { ProductImage } from "src/models";
 
 @Directive({
-  selector: '[appProductThumbnail]'
+  selector: "[app-product-thumbnail]"
 })
-export class ProductThumbnailDirective {
+export class ProductThumbnailDirective implements OnInit {
+  @Input()
+  items: ProductImage[];
+  
+  @HostBinding("attr.src")
+  src;
 
-  constructor() { }
+  constructor() {}
 
+  ngOnInit(): void {
+    if (this.items) {
+      this.src = this.items.find(item => item.thumbnail).url || this.items[0];
+    }
+  }
 }

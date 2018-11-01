@@ -21,12 +21,12 @@ export const initialState: ProductsState = {
         {
           url:
             "https://scontent-waw1-1.xx.fbcdn.net/v/t1.0-9/45027879_566150127157186_3354573653806153728_n.jpg?_nc_cat=109&_nc_ht=scontent-waw1-1.xx&oh=2eaacec4988ae8b5b2fe1cd1cda2d6f4&oe=5C81EF87",
-          mainPhoto: true
+          thumbnail: true
         },
         {
           url:
             "https://scontent-waw1-1.xx.fbcdn.net/v/t1.0-9/45058460_566150147157184_7994547696939565056_n.jpg?_nc_cat=106&_nc_ht=scontent-waw1-1.xx&oh=d8a3139eefa7112238e62959d5e0b4bc&oe=5C7AB19D",
-          mainPhoto: false
+          thumbnail: false
         }
       ],
       price: 130,
@@ -44,7 +44,7 @@ export const initialState: ProductsState = {
         {
           url:
             "https://scontent-waw1-1.xx.fbcdn.net/v/t1.0-9/43655166_565960483842817_6519021947370602496_n.jpg?_nc_cat=109&_nc_ht=scontent-waw1-1.xx&oh=34b9588fb04a59e5c2ecea1e3e683449&oe=5C3C9E85",
-          mainPhoto: true
+          thumbnail: true
         }
       ],
       price: 130,
@@ -64,12 +64,12 @@ export const initialState: ProductsState = {
         {
           url:
             "https://scontent-waw1-1.xx.fbcdn.net/v/t1.0-9/44942782_565460203892845_1211861104586653696_n.jpg?_nc_cat=102&_nc_ht=scontent-waw1-1.xx&oh=3c71f0bce9667ff93a762e49ddacbeff&oe=5C3D5E25",
-          mainPhoto: true
+          thumbnail: true
         },
         {
           url:
             "https://scontent-waw1-1.xx.fbcdn.net/v/t1.0-9/43765107_565460230559509_813149807211184128_n.jpg?_nc_cat=105&_nc_ht=scontent-waw1-1.xx&oh=6d7c5450b5d473d4007285e8160ee18d&oe=5C8A7CA3",
-          mainPhoto: false
+          thumbnail: false
         }
       ],
       price: 80,
@@ -86,12 +86,12 @@ export const initialState: ProductsState = {
         {
           url:
             "https://scontent-waw1-1.xx.fbcdn.net/v/t1.0-9/45027879_566150127157186_3354573653806153728_n.jpg?_nc_cat=109&_nc_ht=scontent-waw1-1.xx&oh=2eaacec4988ae8b5b2fe1cd1cda2d6f4&oe=5C81EF87",
-          mainPhoto: true
+          thumbnail: true
         },
         {
           url:
             "https://scontent-waw1-1.xx.fbcdn.net/v/t1.0-9/45058460_566150147157184_7994547696939565056_n.jpg?_nc_cat=106&_nc_ht=scontent-waw1-1.xx&oh=d8a3139eefa7112238e62959d5e0b4bc&oe=5C7AB19D",
-          mainPhoto: false
+          thumbnail: false
         }
       ],
       price: 130,
@@ -109,7 +109,7 @@ export const initialState: ProductsState = {
         {
           url:
             "https://scontent-waw1-1.xx.fbcdn.net/v/t1.0-9/43655166_565960483842817_6519021947370602496_n.jpg?_nc_cat=109&_nc_ht=scontent-waw1-1.xx&oh=34b9588fb04a59e5c2ecea1e3e683449&oe=5C3C9E85",
-          mainPhoto: true
+          thumbnail: true
         }
       ],
       price: 130,
@@ -129,12 +129,12 @@ export const initialState: ProductsState = {
         {
           url:
             "https://scontent-waw1-1.xx.fbcdn.net/v/t1.0-9/44942782_565460203892845_1211861104586653696_n.jpg?_nc_cat=102&_nc_ht=scontent-waw1-1.xx&oh=3c71f0bce9667ff93a762e49ddacbeff&oe=5C3D5E25",
-          mainPhoto: true
+          thumbnail: true
         },
         {
           url:
             "https://scontent-waw1-1.xx.fbcdn.net/v/t1.0-9/43765107_565460230559509_813149807211184128_n.jpg?_nc_cat=105&_nc_ht=scontent-waw1-1.xx&oh=6d7c5450b5d473d4007285e8160ee18d&oe=5C8A7CA3",
-          mainPhoto: false
+          thumbnail: false
         }
       ],
       price: 80,
