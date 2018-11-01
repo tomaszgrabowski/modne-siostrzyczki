@@ -8,9 +8,10 @@ import { appReducer } from "src/store/reducers";
 import { ProductsListComponent } from "./components/products-list/products-list.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { ProductComponent } from './components/product/product.component';
+import { ProductThumbnailDirective } from './directives/product-thumbnail.directive';
 
 @NgModule({
-  declarations: [AppComponent, ProductsListComponent, ProductComponent],
+  declarations: [AppComponent, ProductsListComponent, ProductComponent, ProductThumbnailDirective],
   imports: [
     BrowserModule,
     StoreModule.forRoot(appReducer),
