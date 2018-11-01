@@ -1,7 +1,12 @@
-export class Product{
+import { ProductImage } from "./product-image";
+import { ProductSize } from "./product-size";
+
+export interface Product{
   id: string;
   name: string;
-  photoUrls: string[];
-  sizes: string[]
-  price: number
+  description: string;
+  photos: ProductImage[];
+  sizes: ProductSize[];
+  price: number;
 }
+
