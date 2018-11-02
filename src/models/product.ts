@@ -1,5 +1,6 @@
 import { ProductImage } from "./product-image";
 import { ProductSize } from "./product-size";
+import { Category } from "./category";
 
 export interface Product{
   id: string;
@@ -9,5 +10,7 @@ export interface Product{
   sizes: ProductSize[];
   price: number;
   date: string;
+  category: Category;
+  newOffer: boolean;
 }
 

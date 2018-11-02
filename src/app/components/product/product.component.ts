@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { Product } from "src/models";
+import { Product, ProductSize } from "src/models";
 import * as moment from "moment";
 
 @Component({
@@ -12,15 +12,14 @@ export class ProductComponent implements OnInit {
   product: Product;
 
   lastItem: boolean;
-  newItem: boolean;
+  availableSizes: ProductSize[];
+
   constructor() {}
 
   ngOnInit() {
-    this.lastItem = this.product.sizes.filter(item=>item.reserved===false).length < 2;
-    console.log(this.product.sizes.filter(item=>item.reserved===false).length);
-    this.newItem =
-      moment(moment.now())
-        .diff(moment(this.product.date), "days")
-        .valueOf() < 7;
+    this.availableSizes = this.product.sizes.filter(
+      item => item.reserved === false
+    );
+    this.lastItem = this.availableSizes.length < 2;
   }
 }

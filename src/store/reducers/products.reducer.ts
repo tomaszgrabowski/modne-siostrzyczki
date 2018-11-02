@@ -1,6 +1,7 @@
-import { Product } from "src/models";
+import { Product, Category } from "src/models";
 import * as fromActions from "../actions/";
 import { createSelector, createFeatureSelector } from "@ngrx/store";
+import * as moment from "moment";
 
 export interface ProductsState {
   data: Product[];
@@ -14,6 +15,8 @@ export const initialState: ProductsState = {
       id: "1818b6ee-89a6-5ae3-8715-71d1dfda9277",
       name: "Świąteczna sukienka",
       date: "2018-11-01",
+      category: Category.Sukienki,
+      newOffer: true,
       description: `Świąteczna propozycja dla mamy i córki.
       Spódniczki dostępne w rozmiarach od 92 do 140.
       Mama 36 38 40
@@ -40,7 +43,9 @@ export const initialState: ProductsState = {
     {
       id: "9f59a90a-77c4-5d9a-a25a-1982107de53c",
       name: "Sukienka w kratę",
-      date: "2018-01-01",
+      date: "2018-01-02",
+      category: Category.Sukienki,
+      newOffer: true,
       description: `Ponadczasowa sukienka w kratkę, idealna na zbliżające się świąteczne sesje fotograficzne`,
       photos: [
         {
@@ -60,6 +65,8 @@ export const initialState: ProductsState = {
       id: "498bd6ff-b8e6-50cf-acfd-6903007e809a",
       name: "Kaloszki dziecięce",
       date: "2018-01-01",
+      category: Category.Buty,
+      newOffer: true,
       description: `Ostatnie dwie pary:
       pszczółki ocieplane, można nosić z ociepleniem i bez, rozmiar 26 długość wkładki z ociepleniem około 16,5 cm
        biedronki nieocieplane rozmiar 25 długość wkładki 16 cm`,
@@ -76,12 +83,14 @@ export const initialState: ProductsState = {
         }
       ],
       price: 80,
-      sizes: [{ size: "24", reserved: false }, { size: "26", reserved: false }]
+      sizes: [{ size: "24", reserved: false }, { size: "26", reserved: true }]
     },
     {
       id: "1818b6ee-89a6-5ae3-8715-71d1dfda9223",
       name: "Świąteczna sukienka",
       date: "2018-01-01",
+      category: Category.Sukienki,
+      newOffer: true,
       description: `Świąteczna propozycja dla mamy i córki.
       Spódniczki dostępne w rozmiarach od 92 do 140.
       Mama 36 38 40
@@ -109,6 +118,8 @@ export const initialState: ProductsState = {
       id: "9f59a90a-77c4-5d9a-a25a-1982107de88c",
       name: "Sukienka w kratę",
       date: "2018-01-01",
+      category: Category.Sukienki,
+      newOffer: true,
       description: `Ponadczasowa sukienka w kratkę, idealna na zbliżające się świąteczne sesje fotograficzne`,
       photos: [
         {
@@ -128,6 +139,8 @@ export const initialState: ProductsState = {
       id: "498bd6ff-b8e6-50cf-acfd-6903007e889a",
       name: "Kaloszki dziecięce",
       date: "2018-01-01",
+      category: Category.Buty,
+      newOffer: true,
       description: `Ostatnie dwie pary:
       pszczółki ocieplane, można nosić z ociepleniem i bez, rozmiar 26 długość wkładki z ociepleniem około 16,5 cm
        biedronki nieocieplane rozmiar 25 długość wkładki 16 cm`,
@@ -187,6 +200,16 @@ export const getProductsState = createFeatureSelector<ProductsState>(
 export const getProducts = createSelector(
   getProductsState,
   (state: ProductsState) => state.data
+);
+
+export const getProductsByCategories = createSelector(
+  getProducts,
+  (state: Product[]) =>
+    state.reduce((prev, next) => {
+      prev[next.category] = prev[next.category] || [];
+      prev[next.category].push(next);
+      return prev;
+    }, {})
 );
 
 export const getProductById = (id: string) => {

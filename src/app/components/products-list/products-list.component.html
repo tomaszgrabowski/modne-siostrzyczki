@@ -1,1 +1,9 @@
-<app-product *ngFor="let product of products | async" [product]="product"></app-product>
+<!-- <app-product *ngFor="let product of products | async" [product]="product"></app-product> -->
+<!-- category-list -->
+      <!-- products -->
+
+<ul>
+  <li *ngFor="let category of productsByCategory | keyvalue">{{category.key}}
+      <app-product *ngFor="let product of category.value" [product]="product"></app-product>
+  </li>
+</ul>

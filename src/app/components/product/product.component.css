@@ -1,7 +1,15 @@
 .card {
   object-fit: cover;
-  height: 20rem;
+  height: 23rem;
   margin: 1rem;
+}
+.card-body ul,.card-body li{
+  margin:0;
+  padding: 0;
+}
+.card-body li{
+  display: inline;
+  list-style-type: none;
 }
 .badge-container {
   transform: translate(0, -120%);
