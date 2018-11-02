@@ -13,6 +13,7 @@ export const initialState: ProductsState = {
     {
       id: "1818b6ee-89a6-5ae3-8715-71d1dfda9277",
       name: "Świąteczna sukienka",
+      date: "2018-01-01",
       description: `Świąteczna propozycja dla mamy i córki.
       Spódniczki dostępne w rozmiarach od 92 do 140.
       Mama 36 38 40
@@ -39,6 +40,7 @@ export const initialState: ProductsState = {
     {
       id: "9f59a90a-77c4-5d9a-a25a-1982107de53c",
       name: "Sukienka w kratę",
+      date: "2018-01-01",
       description: `Ponadczasowa sukienka w kratkę, idealna na zbliżające się świąteczne sesje fotograficzne`,
       photos: [
         {
@@ -57,6 +59,7 @@ export const initialState: ProductsState = {
     {
       id: "498bd6ff-b8e6-50cf-acfd-6903007e809a",
       name: "Kaloszki dziecięce",
+      date: "2018-01-01",
       description: `Ostatnie dwie pary:
       pszczółki ocieplane, można nosić z ociepleniem i bez, rozmiar 26 długość wkładki z ociepleniem około 16,5 cm
        biedronki nieocieplane rozmiar 25 długość wkładki 16 cm`,
@@ -76,8 +79,9 @@ export const initialState: ProductsState = {
       sizes: [{ size: "24", reserved: false }, { size: "26", reserved: false }]
     },
     {
-      id: "1818b6ee-89a6-5ae3-8715-71d1dfda9277",
+      id: "1818b6ee-89a6-5ae3-8715-71d1dfda9223",
       name: "Świąteczna sukienka",
+      date: "2018-01-01",
       description: `Świąteczna propozycja dla mamy i córki.
       Spódniczki dostępne w rozmiarach od 92 do 140.
       Mama 36 38 40
@@ -102,8 +106,9 @@ export const initialState: ProductsState = {
       ]
     },
     {
-      id: "9f59a90a-77c4-5d9a-a25a-1982107de53c",
+      id: "9f59a90a-77c4-5d9a-a25a-1982107de88c",
       name: "Sukienka w kratę",
+      date: "2018-01-01",
       description: `Ponadczasowa sukienka w kratkę, idealna na zbliżające się świąteczne sesje fotograficzne`,
       photos: [
         {
@@ -120,8 +125,9 @@ export const initialState: ProductsState = {
       ]
     },
     {
-      id: "498bd6ff-b8e6-50cf-acfd-6903007e809a",
+      id: "498bd6ff-b8e6-50cf-acfd-6903007e889a",
       name: "Kaloszki dziecięce",
+      date: "2018-01-01",
       description: `Ostatnie dwie pary:
       pszczółki ocieplane, można nosić z ociepleniem i bez, rozmiar 26 długość wkładki z ociepleniem około 16,5 cm
        biedronki nieocieplane rozmiar 25 długość wkładki 16 cm`,
@@ -182,3 +188,9 @@ export const getProducts = createSelector(
   getProductsState,
   (state: ProductsState) => state.data
 );
+
+export const getProductById = (id: string) => {
+  return createSelector(getProducts, (state: Product[]) => {
+    return state.find(product => product.id === id);
+  });
+};

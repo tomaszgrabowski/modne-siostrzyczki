@@ -1,6 +1,8 @@
-<div class="card" style="width: 12rem;" (click)="navigateToProduct(product)">
-    <img app-product-thumbnail [items]="product.photos"/>
-    <div class="card-body">
-      <h5 class="card-title">{{product.name}}</h5>
-    </div>
+<a class="card" style="width: 12rem;" [routerLink]="['/product', product.id]" ter>
+  <img app-product-thumbnail [items]="product.photos" />
+  <div class="card-body">
+    <h5 class="card-title">{{product.name}}</h5>
+    <span class="badge badge-secondary">Nowość</span>
+    <span class="badge badge-warning">Ostatnia sztuka!</span>
   </div>
+</a>

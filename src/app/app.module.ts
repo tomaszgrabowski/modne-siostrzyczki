@@ -12,10 +12,16 @@ import { ProductThumbnailDirective } from "./directives/product-thumbnail.direct
 import { RouterModule, Routes } from "@angular/router";
 import { ContactComponent } from "./components/contact/contact.component";
 import { NavMenuComponent } from "./components/nav-menu/nav-menu.component";
+import { CartComponent } from './components/cart/cart.component';
+import { OrderComponent } from './components/order/order.component';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
 
 const routes: Routes = [
   { path: "", component: ProductsListComponent, pathMatch: "full" },
-  { path: "contact", component: ContactComponent }
+  { path: "product/:id", component: ProductDetailsComponent },
+  { path: "contact", component: ContactComponent },
+  { path: "cart", component: CartComponent },
+  { path: "checkout", component: OrderComponent },
 ];
 
 @NgModule({
@@ -25,7 +31,10 @@ const routes: Routes = [
     ProductComponent,
     ProductThumbnailDirective,
     ContactComponent,
-    NavMenuComponent
+    NavMenuComponent,
+    CartComponent,
+    OrderComponent,
+    ProductDetailsComponent
   ],
   imports: [
     BrowserModule,

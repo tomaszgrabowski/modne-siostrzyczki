@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavMenuComponent implements OnInit {
 
+  activeRouteBorderStyle: string[] = ['border-bottom', 'border-primary'];
+
   constructor() { }
 
   ngOnInit() {

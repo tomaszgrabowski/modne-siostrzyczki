@@ -8,5 +8,6 @@ export interface Product{
   photos: ProductImage[];
   sizes: ProductSize[];
   price: number;
+  date: string;
 }
 
