@@ -13,7 +13,7 @@ export const initialState: ProductsState = {
     {
       id: "1818b6ee-89a6-5ae3-8715-71d1dfda9277",
       name: "Świąteczna sukienka",
-      date: "2018-01-01",
+      date: "2018-11-01",
       description: `Świąteczna propozycja dla mamy i córki.
       Spódniczki dostępne w rozmiarach od 92 do 140.
       Mama 36 38 40
@@ -51,8 +51,8 @@ export const initialState: ProductsState = {
       ],
       price: 130,
       sizes: [
-        { size: "80/86", reserved: false },
-        { size: "116", reserved: false },
+        { size: "80/86", reserved: true },
+        { size: "116", reserved: true },
         { size: "128", reserved: false }
       ]
     },

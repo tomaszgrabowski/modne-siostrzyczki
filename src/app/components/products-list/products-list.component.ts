@@ -11,8 +11,12 @@ import { Product } from "src/models";
   styleUrls: ["./products-list.component.css"]
 })
 export class ProductsListComponent implements OnInit {
-  @HostBinding('attr.class') cssClass = 'row';
+  @HostBinding("attr.class")
+  cssClass = "row";
+
   private products: Observable<Product[]>;
+  private amount: number;
+
   constructor(private store: Store<fromReducers.AppState>) {}
 
   ngOnInit() {
