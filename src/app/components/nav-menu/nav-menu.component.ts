@@ -8,7 +8,7 @@ import { faHome, faEnvelope, faShoppingCart, faMoneyCheckAlt } from '@fortawesom
 })
 export class NavMenuComponent implements OnInit {
 
-  activeRouteBorderStyle: string[] = ['border-bottom', 'border-primary'];
+  activeRouteBorderStyle: string[] = ['active-route'];
   faHome = faHome;
   faEvenlope = faEnvelope;
   faShoppingCart = faShoppingCart;
