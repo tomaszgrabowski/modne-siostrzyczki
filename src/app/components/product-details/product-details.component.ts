@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import * as fromReducers from "src/store/reducers";
-import { Product, ProductImage } from "src/models";
+import { Product, ProductImage, ProductSize } from "src/models";
 import { getProductById, getProductAvailableSizes } from "src/store/reducers";
 import { ActivatedRoute } from "@angular/router";
 import { faFire } from "@fortawesome/free-solid-svg-icons";
@@ -17,6 +17,7 @@ export class ProductDetailsComponent implements OnInit {
   private choosenImage: string;
   private faFire = faFire;
   private lastItem: boolean;
+  private choosenSize: string;
 
   constructor(
     private store: Store<fromReducers.AppState>,
@@ -24,6 +25,7 @@ export class ProductDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.choosenSize = "Rozmiar";
     this.route.params.subscribe(params => (this.id = params["id"]));
     this.store.select(getProductById(this.id)).subscribe(product => {
       this.product = product;
@@ -36,5 +38,9 @@ export class ProductDetailsComponent implements OnInit {
 
   private chooseImage(image:ProductImage):void{
     this.choosenImage = image.url;
+  }
+
+  private chooseSize(size: ProductSize):void{
+    this.choosenSize = size.size;
   }
 }
