@@ -1,14 +1,26 @@
-<ul class="nav">
+<ul class="nav justify-content-center nav-fill w-100">
   <li class="nav-item">
-    <a class="nav-link" [routerLink]="['/']" [routerLinkActive]="activeRouteBorderStyle" [routerLinkActiveOptions]="{exact: true}">Home</a>
+    <a class="nav-link" [routerLink]="['/']" [routerLinkActive]="activeRouteBorderStyle" [routerLinkActiveOptions]="{exact: true}">
+      <fa-icon [icon]="faHome"></fa-icon>
+      Home
+    </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" [routerLink]="['/contact']" [routerLinkActive]="activeRouteBorderStyle">Kontakt</a>
+    <a class="nav-link" [routerLink]="['/contact']" [routerLinkActive]="activeRouteBorderStyle">
+      <fa-icon [icon]="faEvenlope"></fa-icon>
+      Kontakt
+    </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" [routerLink]="['/cart']" [routerLinkActive]="activeRouteBorderStyle">Koszyk</a>
+    <a class="nav-link" [routerLink]="['/cart']" [routerLinkActive]="activeRouteBorderStyle">
+      <fa-icon [icon]="faShoppingCart"></fa-icon>
+      Koszyk
+    </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" [routerLink]="['/checkout']" [routerLinkActive]="activeRouteBorderStyle">Zamówienie</a>
+    <a class="nav-link" [routerLink]="['/checkout']" [routerLinkActive]="activeRouteBorderStyle">
+      <fa-icon [icon]="faMoneyCheckAlt"></fa-icon>
+      Zamówienie
+    </a>
   </li>
 </ul>

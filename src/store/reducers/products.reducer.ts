@@ -1,7 +1,6 @@
 import { Product, Category } from "src/models";
 import * as fromActions from "../actions/";
 import { createSelector, createFeatureSelector } from "@ngrx/store";
-import * as moment from "moment";
 
 export interface ProductsState {
   data: Product[];
@@ -13,7 +12,7 @@ export const initialState: ProductsState = {
   data: [
     {
       id: "1818b6ee-89a6-5ae3-8715-71d1dfda9277",
-      name: "Świąteczna sukienka",
+      name: "Świąteczna sukienka w kratę",
       date: "2018-11-01",
       category: Category.Sukienki,
       newOffer: true,
@@ -217,3 +216,8 @@ export const getProductById = (id: string) => {
     return state.find(product => product.id === id);
   });
 };
+
+export const getNewProducts = createSelector(
+  getProducts,
+  (state: Product[]) => state.filter(product=>product.newOffer)
+)

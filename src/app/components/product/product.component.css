@@ -1,25 +1,27 @@
 .card {
   object-fit: cover;
-  height: 23rem;
+  height: 24rem;
   margin: 1rem;
+  color: #333;
 }
-.card-body ul,.card-body li{
-  margin:0;
-  padding: 0;
+.card-body{
+  padding: 0 1rem 0 1rem;
 }
-.card-body li{
-  display: inline;
-  list-style-type: none;
+.card-title{
+  width: 12rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .badge-container {
-  transform: translate(0, -120%);
+  transform: translate(2%, -130%);
 }
 .badge {
   margin: 0.2rem;
   display: inline;
 }
 img {
-  height: 12rem;
+  height: 16rem;
   width: auto;
 }
 a {

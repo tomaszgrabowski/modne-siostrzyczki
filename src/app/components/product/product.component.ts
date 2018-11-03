@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { Product, ProductSize } from "src/models";
-import * as moment from "moment";
+import { faFire } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: "app-product",
@@ -10,7 +10,7 @@ import * as moment from "moment";
 export class ProductComponent implements OnInit {
   @Input()
   product: Product;
-
+  faFire = faFire;
   lastItem: boolean;
   availableSizes: ProductSize[];
 

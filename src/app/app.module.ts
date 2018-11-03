@@ -16,6 +16,8 @@ import { CartComponent } from './components/cart/cart.component';
 import { OrderComponent } from './components/order/order.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 const routes: Routes = [
   { path: "", component: ProductsListComponent, pathMatch: "full" },
   { path: "product/:id", component: ProductDetailsComponent },
@@ -43,7 +45,8 @@ const routes: Routes = [
       maxAge: 5
     }),
     NgbModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

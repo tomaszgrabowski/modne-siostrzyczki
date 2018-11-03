@@ -2,8 +2,8 @@ import { Component, OnInit, HostBinding } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import * as fromReducers from "src/store/reducers";
-import { getProducts, getProductsByCategories } from "src/store/reducers/products.reducer";
-import { Product, Category } from "src/models";
+import { getProducts, getNewProducts } from "src/store/reducers/products.reducer";
+import { Product } from "src/models";
 
 @Component({
   selector: "app-products-list",
@@ -16,18 +16,13 @@ export class ProductsListComponent implements OnInit {
 
   private products: Observable<Product[]>;
   private amount: number;
-  private productsByCategory: any;
-  private categories: string[];
 
   constructor(private store: Store<fromReducers.AppState>) {}
 
   ngOnInit() {
-    //this.products = this.store.select(getProducts);
-    this.store.select(getProductsByCategories).subscribe(_categories=>{
-      console.log(_categories);
-      this.categories = Object.keys(_categories);
-      this.productsByCategory = _categories;
-    })
-    //this.productsByCategory = this.store.select(getProductsByCategories);
+    this.products = this.store.select(getNewProducts);
+    this.products.subscribe(
+      products => (this.amount = products.length)
+    );
   }
 }

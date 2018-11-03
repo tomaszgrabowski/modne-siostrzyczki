@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faHome, faEnvelope, faShoppingCart, faMoneyCheckAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-nav-menu',
@@ -8,6 +9,10 @@ import { Component, OnInit } from '@angular/core';
 export class NavMenuComponent implements OnInit {
 
   activeRouteBorderStyle: string[] = ['border-bottom', 'border-primary'];
+  faHome = faHome;
+  faEvenlope = faEnvelope;
+  faShoppingCart = faShoppingCart;
+  faMoneyCheckAlt = faMoneyCheckAlt;
 
   constructor() { }
 

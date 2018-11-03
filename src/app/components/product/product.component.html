@@ -1,12 +1,16 @@
-<a class="card" style="width: 12rem;" [routerLink]="['/product', product.id]" ter>
+<a class="card" [routerLink]="['/product', product.id]">
   <img app-product-thumbnail [items]="product.photos" />
   <div class="badge-container">
-    <span *ngIf="product.newOffer" class="badge badge-danger">Nowość</span>
-    <span *ngIf="lastItem" class="badge badge-warning">Ostatnia sztuka!</span>
+    <span *ngIf="product.newOffer" class="badge badge-danger">
+      <fa-icon [icon]="faFire"></fa-icon>
+        Nowość
+    </span>
+    <span *ngIf="lastItem" class="badge badge-warning">Ostatnia sztuka</span>
   </div>
   <div class="card-body">
-    <h5 class="card-title">{{product.name}}</h5>
-    rozmiary:<br/>
-    <span *ngFor="let size of product.sizes" [ngClass]=" size.reserved ? 'badge badge-warning': 'badge badge-success'">{{size.size}}</span>
+    <h4 class="card-title">{{product.name}}</h4>
+  </div>
+  <div class="card-footer">
+    roz: <span *ngFor="let size of availableSizes" class="badge badge-success">{{size.size}}</span>
   </div>
 </a>
