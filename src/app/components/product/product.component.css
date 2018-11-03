@@ -26,11 +26,9 @@ img {
 }
 a {
   color: black;
-  transition: all 0.4s;
 }
 a:hover {
   text-decoration: none;
-
-  transform: translateY(-0.3rem) scale(1.05) rotate(5deg);
-  box-shadow: 0 1rem 1rem #999;
 }
+
+

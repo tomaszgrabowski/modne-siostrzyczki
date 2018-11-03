@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { Product, ProductSize } from "src/models";
 import { faFire } from '@fortawesome/free-solid-svg-icons';
+import { Store } from "@ngrx/store";
+import * as fromReducers from "src/store/reducers";
+import { getProductAvailableSizes } from "src/store/reducers";
 
 @Component({
   selector: "app-product",
@@ -14,12 +17,10 @@ export class ProductComponent implements OnInit {
   lastItem: boolean;
   availableSizes: ProductSize[];
 
-  constructor() {}
+  constructor(private store: Store<fromReducers.AppState>) {}
 
   ngOnInit() {
-    this.availableSizes = this.product.sizes.filter(
-      item => item.reserved === false
-    );
+    this.store.select(getProductAvailableSizes(this.product.id)).subscribe(sizes=> this.availableSizes = sizes);
     this.lastItem = this.availableSizes.length < 2;
   }
 }

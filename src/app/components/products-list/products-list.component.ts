@@ -2,7 +2,7 @@ import { Component, OnInit, HostBinding } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import * as fromReducers from "src/store/reducers";
-import { getProducts, getNewProducts } from "src/store/reducers/products.reducer";
+import { getNewProducts } from "src/store/reducers/products.reducer";
 import { Product } from "src/models";
 
 @Component({

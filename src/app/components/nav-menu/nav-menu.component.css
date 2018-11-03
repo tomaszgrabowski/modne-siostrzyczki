@@ -12,3 +12,6 @@
 .active-route{
   color: #333 !important;
 }
+.nav .ng-fa-icon{
+  margin-right: 0.5rem;
+}

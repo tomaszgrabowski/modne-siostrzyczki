@@ -217,7 +217,14 @@ export const getProductById = (id: string) => {
   });
 };
 
-export const getNewProducts = createSelector(
-  getProducts,
-  (state: Product[]) => state.filter(product=>product.newOffer)
-)
+export const getNewProducts = createSelector(getProducts, (state: Product[]) =>
+  state.filter(product => product.newOffer)
+);
+
+export const getProductAvailableSizes = (id: string) => {
+  return createSelector(getProducts, (state: Product[]) => {
+    return state
+      .find(product => product.id === id)
+      .sizes.filter(size => size.reserved === false);
+  });
+};

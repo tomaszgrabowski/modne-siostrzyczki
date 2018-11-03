@@ -7,7 +7,7 @@ import { ProductImage } from "src/models";
 export class ProductThumbnailDirective implements OnInit {
   @Input()
   items: ProductImage[];
-  
+
   @HostBinding("attr.src")
   src;
 

@@ -1,4 +1,4 @@
-<a class="card" [routerLink]="['/product', product.id]">
+<a class="card hoover-animation" [routerLink]="['/product', product.id]">
   <img app-product-thumbnail [items]="product.photos" />
   <div class="badge-container">
     <span *ngIf="product.newOffer" class="badge badge-danger">
