@@ -14,7 +14,7 @@
   <li class="nav-item">
     <a class="nav-link" [routerLink]="['/cart']" [routerLinkActive]="activeRouteBorderStyle">
       <fa-icon [icon]="faShoppingCart"></fa-icon>
-      Koszyk
+      Koszyk ({{productsInCart | async}})
     </a>
   </li>
   <li class="nav-item">

@@ -12,5 +12,6 @@ export interface Product{
   date: string;
   category: Category;
   newOffer: boolean;
+  choosenSize?: string;
 }
 

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { faHome, faEnvelope, faShoppingCart, faMoneyCheckAlt } from '@fortawesome/free-solid-svg-icons';
+import { AppState, getOrderProducts } from 'src/store/reducers';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-nav-menu',
@@ -8,15 +11,19 @@ import { faHome, faEnvelope, faShoppingCart, faMoneyCheckAlt } from '@fortawesom
 })
 export class NavMenuComponent implements OnInit {
 
-  activeRouteBorderStyle: string[] = ['active-route'];
-  faHome = faHome;
-  faEvenlope = faEnvelope;
-  faShoppingCart = faShoppingCart;
-  faMoneyCheckAlt = faMoneyCheckAlt;
+  private activeRouteBorderStyle: string[] = ['active-route'];
+  private faHome = faHome;
+  private faEvenlope = faEnvelope;
+  private faShoppingCart = faShoppingCart;
+  private faMoneyCheckAlt = faMoneyCheckAlt;
+  private productsInCart: number = 0;
 
-  constructor() { }
+  constructor(private store: Store<AppState>) { }
 
   ngOnInit() {
+    this.store.select(getOrderProducts).subscribe( count => {
+      console.log('aaa',count);
+    });
   }
 
 }

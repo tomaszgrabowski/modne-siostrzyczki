@@ -1,5 +1,6 @@
 import { Order, Product } from "src/models";
 import * as fromActions from "../actions";
+import { createFeatureSelector, createSelector } from "@ngrx/store";
 
 export interface OrderState {
   data: Order;
@@ -40,7 +41,7 @@ export function ordersReducer(
     case fromActions.ADD_PRODUCT_TO_ORDER:
       ({
         ...state,
-        data: state.data.products.push((<Product>action.payload)),
+        data: state.data.products.push(<Product>action.payload),
         loading: false,
         loaded: true
       });
@@ -48,3 +49,15 @@ export function ordersReducer(
 
   return state;
 }
+
+export const getOrderState = createFeatureSelector<OrderState>("order");
+
+export const getOrder = createSelector(
+  getOrderState,
+  (state: OrderState) => state.data
+);
+
+export const getOrderProducts = createSelector(
+  getOrder,
+  (state: Order) => state.products
+);

@@ -12,18 +12,21 @@ import { ProductThumbnailDirective } from "./directives/product-thumbnail.direct
 import { RouterModule, Routes } from "@angular/router";
 import { ContactComponent } from "./components/contact/contact.component";
 import { NavMenuComponent } from "./components/nav-menu/nav-menu.component";
-import { CartComponent } from './components/cart/cart.component';
-import { OrderComponent } from './components/order/order.component';
-import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { CartComponent } from "./components/cart/cart.component";
+import { OrderComponent } from "./components/order/order.component";
+import { ProductDetailsComponent } from "./components/product-details/product-details.component";
 
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { ToastrModule } from "ngx-toastr";
+
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 const routes: Routes = [
   { path: "", component: ProductsListComponent, pathMatch: "full" },
   { path: "product/:id", component: ProductDetailsComponent },
   { path: "contact", component: ContactComponent },
   { path: "cart", component: CartComponent },
-  { path: "checkout", component: OrderComponent },
+  { path: "checkout", component: OrderComponent }
 ];
 
 @NgModule({
@@ -46,7 +49,15 @@ const routes: Routes = [
     }),
     NgbModule,
     RouterModule.forRoot(routes),
-    FontAwesomeModule
+    FontAwesomeModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      positionClass: "toast-bottom-right",
+      preventDuplicates: true,
+      progressAnimation: "decreasing",
+      progressBar: true,
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

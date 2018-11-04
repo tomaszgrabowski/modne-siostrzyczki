@@ -3,9 +3,14 @@ import { Store } from "@ngrx/store";
 import * as fromReducers from "src/store/reducers";
 import * as fromActions from "src/store/actions";
 import { Product, ProductImage, ProductSize } from "src/models";
-import { getProductById, getProductAvailableSizes } from "src/store/reducers";
+import {
+  getProductById,
+  getProductAvailableSizes,
+  getOrder
+} from "src/store/reducers";
 import { ActivatedRoute } from "@angular/router";
 import { faFire } from "@fortawesome/free-solid-svg-icons";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: "app-product-details",
@@ -19,14 +24,17 @@ export class ProductDetailsComponent implements OnInit {
   private faFire = faFire;
   private lastItem: boolean;
   private choosenSize: string;
+  private orderDisabled: boolean;
 
   constructor(
     private store: Store<fromReducers.AppState>,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
     this.choosenSize = "Rozmiar";
+    this.orderDisabled = true;
     this.route.params.subscribe(params => (this.id = params["id"]));
     this.store.select(getProductById(this.id)).subscribe(product => {
       this.product = product;
@@ -37,16 +45,23 @@ export class ProductDetailsComponent implements OnInit {
       .subscribe(sizes => (this.lastItem = sizes.length < 2));
   }
 
-  private chooseImage(image:ProductImage):void{
+  private chooseImage(image: ProductImage): void {
     this.choosenImage = image.url;
   }
 
-  private chooseSize(size: ProductSize):void{
+  private chooseSize(size: ProductSize): void {
     this.choosenSize = size.size;
+    this.orderDisabled = this.choosenSize === "Rozmiar" ? true : false;
   }
 
-  private addToCart(product: Product): void{
-    this.store.dispatch(new fromActions.AddProductToOrder(product));
-    this.store.subscribe(x=>console.log(x));
+  private addToCart(product: Product): void {
+    this.store.dispatch(
+      new fromActions.AddProductToOrder({
+        ...product,
+        choosenSize: this.choosenSize
+      })
+    );
+    this.store.select(getOrder).subscribe(order => console.log(order));
+    this.toastr.success("Produkt dodano do koszyka...","Infomracja");
   }
 }

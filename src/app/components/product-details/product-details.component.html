@@ -33,7 +33,7 @@
         <button class="dropdown-item" *ngFor="let size of product.sizes" (click)="chooseSize(size)">{{size.size}}</button>
       </div>
     </div>&nbsp;
-    <button class="btn btn-primary" (click)="addToCart(product)">Dodaj do koszyka</button>
+    <button class="btn btn-primary" [disabled]="orderDisabled" (click)="addToCart(product)">Dodaj do koszyka</button>
 
   </div>
 </div>
