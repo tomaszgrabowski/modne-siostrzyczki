@@ -8,7 +8,7 @@ export interface ProductsState {
   loaded: boolean;
 }
 
-export const initialState: ProductsState = {
+const initialState: ProductsState = {
   data: [
     {
       id: "1818b6ee-89a6-5ae3-8715-71d1dfda9277",

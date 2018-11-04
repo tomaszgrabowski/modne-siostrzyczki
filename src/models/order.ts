@@ -7,5 +7,5 @@ export interface Order{
   date: string;
   products: Product[];
   user: User;
-  deliveryAddress: DeliveryAddress;
+  deliveryAddress?: DeliveryAddress;
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import * as fromReducers from "src/store/reducers";
+import * as fromActions from "src/store/actions";
 import { Product, ProductImage, ProductSize } from "src/models";
 import { getProductById, getProductAvailableSizes } from "src/store/reducers";
 import { ActivatedRoute } from "@angular/router";
@@ -42,5 +43,10 @@ export class ProductDetailsComponent implements OnInit {
 
   private chooseSize(size: ProductSize):void{
     this.choosenSize = size.size;
+  }
+
+  private addToCart(product: Product): void{
+    this.store.dispatch(new fromActions.AddProductToOrder(product));
+    this.store.subscribe(x=>console.log(x));
   }
 }
