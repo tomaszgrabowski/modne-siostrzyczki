@@ -39,12 +39,14 @@ export function ordersReducer(
 ): OrderState {
   switch (action.type) {
     case fromActions.ADD_PRODUCT_TO_ORDER:
-      ({
-        ...state,
-        data: state.data.products.push(<Product>action.payload),
-        loading: false,
-        loaded: true
-      });
+      return {
+        data: {
+          ...state.data,
+          products: [...state.data.products, <Product>action.payload]
+        },
+        loaded: true,
+        loading: true
+      };
   }
 
   return state;
@@ -60,4 +62,9 @@ export const getOrder = createSelector(
 export const getOrderProducts = createSelector(
   getOrder,
   (state: Order) => state.products
+);
+
+export const getOrderProductsCount = createSelector(
+  getOrderProducts,
+  (state: Product[]) => state.length
 );

@@ -61,7 +61,7 @@ export class ProductDetailsComponent implements OnInit {
         choosenSize: this.choosenSize
       })
     );
-    this.store.select(getOrder).subscribe(order => console.log(order));
-    this.toastr.success("Produkt dodano do koszyka...","Infomracja");
+    //this.store.select(getOrder).subscribe(order => console.log(order));
+    this.toastr.success("Produkt dodano do koszyka...");
   }
 }

@@ -2,20 +2,22 @@
   <div class="col-md-6">
     <div class="row">
       <div class="col-md-12">
-        <img [src]="choosenImage" class="img-fluid" alt="Responsive image">
+        <img [src]="choosenImage" class="img-fluid" alt="Responsive image" />
       </div>
     </div>
     <div class="row">
       <div *ngFor="let image of product.photos" class="col-md-3">
-        <img [src]="image.url" class="img-thumbnail hoover-animation" (click)="chooseImage(image)" />
+        <img
+          [src]="image.url"
+          class="img-thumbnail hoover-animation"
+          (click)="chooseImage(image)"
+        />
       </div>
     </div>
-
-
   </div>
   <div class="col-md-6">
-    <h2>{{product.name}}</h2>
-    <h3 class="text-secondary">cena: {{product.price}} Zł</h3>
+    <h2>{{ product.name }}</h2>
+    <h3 class="text-secondary">cena: {{ product.price }} Zł</h3>
     <p>
       <span *ngIf="product.newOffer" class="badge badge-danger">
         <fa-icon [icon]="faFire"></fa-icon>
@@ -23,17 +25,33 @@
       </span>
       <span *ngIf="lastItem" class="badge badge-warning">Ostatnia sztuka</span>
     </p>
-    <p>
-      {{product.description}}
-    </p>
+    <p>{{ product.description }}</p>
 
     <div ngbDropdown class="d-inline-block">
-      <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{choosenSize}}</button>
+      <button
+        class="btn btn-outline-primary"
+        id="dropdownBasic1"
+        ngbDropdownToggle
+      >
+        {{ choosenSize }}
+      </button>
       <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-        <button class="dropdown-item" *ngFor="let size of product.sizes" (click)="chooseSize(size)">{{size.size}}</button>
+        <button
+          class="dropdown-item"
+          *ngFor="let size of product.sizes"
+          (click)="chooseSize(size)"
+        >
+          {{ size.size }}
+        </button>
       </div>
-    </div>&nbsp;
-    <button class="btn btn-primary" [disabled]="orderDisabled" (click)="addToCart(product)">Dodaj do koszyka</button>
-
+    </div>
+    &nbsp;
+    <button
+      class="btn btn-primary"
+      [disabled]="orderDisabled"
+      (click)="addToCart(product)"
+    >
+      Dodaj do koszyka
+    </button>
   </div>
 </div>
