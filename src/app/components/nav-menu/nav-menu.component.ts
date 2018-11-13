@@ -7,8 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { AppState, getOrderProductsCount } from "src/store/reducers";
 import { Store } from "@ngrx/store";
-import { Observable } from "rxjs";
-import { Order } from "src/models";
+import { tap, delay } from "rxjs/operators";
 
 @Component({
   selector: "app-nav-menu",
@@ -21,11 +20,21 @@ export class NavMenuComponent implements OnInit {
   private faEvenlope = faEnvelope;
   private faShoppingCart = faShoppingCart;
   private faMoneyCheckAlt = faMoneyCheckAlt;
-  private productsInCart: Observable<number>;
+  private productsInCart: number;
+  private countClass: string[];
 
   constructor(private store: Store<AppState>) {}
 
   ngOnInit() {
-    this.productsInCart = this.store.select(getOrderProductsCount);
+    this.store.select(getOrderProductsCount).pipe(
+      tap(val => {
+        this.productsInCart = val;
+        this.countClass = ["nav-item", "pop-out"];
+      }),
+      delay(300),
+      tap(val => {
+        this.countClass = ["nav-item"];
+      })
+    ).subscribe(count=>this.productsInCart = count);
   }
 }

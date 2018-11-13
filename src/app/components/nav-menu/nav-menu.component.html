@@ -11,10 +11,10 @@
       Kontakt
     </a>
   </li>
-  <li class="nav-item">
+  <li [ngClass]="countClass" class="nav-item">
     <a class="nav-link" [routerLink]="['/cart']" [routerLinkActive]="activeRouteBorderStyle">
       <fa-icon [icon]="faShoppingCart"></fa-icon>
-      Koszyk ({{productsInCart | async}})
+      Koszyk ({{productsInCart}})
     </a>
   </li>
   <li class="nav-item">
