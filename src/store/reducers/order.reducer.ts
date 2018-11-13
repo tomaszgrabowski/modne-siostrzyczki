@@ -47,6 +47,16 @@ export function ordersReducer(
         loaded: true,
         loading: true
       };
+    case fromActions.REMOVE_PRODUCT_FROM_ORDER:
+      const products = state.data.products.filter(product=>product.id !== action.payload.id);
+      return {
+        data: {
+          ...state.data,
+          products
+        },
+        loaded: true,
+        loading: true
+      };
   }
 
   return state;

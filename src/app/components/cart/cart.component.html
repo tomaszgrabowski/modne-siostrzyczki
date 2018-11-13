@@ -1,22 +1,27 @@
 <div class="row">
   <div class="col-lg-12">
-    <table class="table table-sm" *ngIf="(productsCount | async) != 0">
+    <table class="table" *ngIf="(productsCount | async) !== 0">
       <thead>
         <tr>
-          <th scope="col">#</th>
+          <th scope="col"></th>
           <th scope="col">Nazwa</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
+          <th scope="col">Rozmiar</th>
+          <th scope="col">Usuń</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let product of products | async">
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
+          <th scope="row"><img [src]="product.photos[0].url" class="img-thumbnail"/></th>
+          <td>{{product.name}}</td>
+          <td>{{product.choosenSize}}</td>
+          <td><button class="btn btn-danger" (click)="remove(product)"><fa-icon [icon]="faTrash"></fa-icon></button></td>
         </tr>
       </tbody>
     </table>
+    <p  *ngIf="(productsCount | async) === 0">
+      <ngb-alert type="info" [dismissible]="false">
+        Aktualnie twój koszyk jest pusty, dodaj coś do niego!
+      </ngb-alert>
+    </p>
   </div>
 </div>
