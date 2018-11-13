@@ -18,7 +18,7 @@
         </tr>
       </tbody>
     </table>
-    <p  *ngIf="(productsCount | async) === 0">
+    <p class="pop-out" *ngIf="(productsCount | async) === 0">
       <ngb-alert type="info" [dismissible]="false">
         Aktualnie twój koszyk jest pusty, dodaj coś do niego!
       </ngb-alert>
