@@ -48,11 +48,13 @@ export function ordersReducer(
         loading: true
       };
     case fromActions.REMOVE_PRODUCT_FROM_ORDER:
-      const products = state.data.products.filter(product=>product.id !== action.payload.id);
+      const index = state.data.products.indexOf(<Product>action.payload);
+      state.data.products.splice(index,1);
+
       return {
         data: {
           ...state.data,
-          products
+          products: [...state.data.products]
         },
         loaded: true,
         loading: true
@@ -72,6 +74,23 @@ export const getOrder = createSelector(
 export const getOrderProducts = createSelector(
   getOrder,
   (state: Order) => state.products
+);
+
+export const getGruppedOrderProducts = createSelector(
+  getOrder,
+  (state: Order) => {
+    const gruppedProducts = state.products.reduce((prev, next) => {
+      prev[next.choosenSize] = prev[next.choosenSize] || [];
+      prev[next.choosenSize].push(next);
+      return prev;
+    }, {});
+    return Object.keys(gruppedProducts).map(key=> {
+      return {
+        key,
+        value: gruppedProducts[key]
+      }
+    })
+  }
 );
 
 export const getOrderProductsCount = createSelector(

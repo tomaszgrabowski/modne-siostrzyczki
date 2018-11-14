@@ -34,9 +34,21 @@ const initialState: ProductsState = {
       ],
       price: 130,
       sizes: [
-        { size: "36", reserved: false },
-        { size: "38", reserved: false },
-        { size: "40", reserved: false }
+        {
+          size: "36",
+          reserved: false,
+          id: "bf6f3249-3c6a-5808-80d6-1acf72d1a061"
+        },
+        {
+          size: "38",
+          reserved: false,
+          id: "4824bb9c-d948-5cbb-ad64-bb78103fac80"
+        },
+        {
+          size: "40",
+          reserved: false,
+          id: "16efb6d7-1eee-5065-86d8-76cdba3ceff7"
+        }
       ]
     },
     {
@@ -55,9 +67,21 @@ const initialState: ProductsState = {
       ],
       price: 130,
       sizes: [
-        { size: "80/86", reserved: true },
-        { size: "116", reserved: true },
-        { size: "128", reserved: false }
+        {
+          size: "80/86",
+          reserved: true,
+          id: "350cfba2-997e-582c-a909-1d0a305a072b"
+        },
+        {
+          size: "116",
+          reserved: true,
+          id: "fd7d43c9-d020-5c61-ac64-c0cb056a3374"
+        },
+        {
+          size: "128",
+          reserved: false,
+          id: "4a1a4766-802a-5c3e-8ec6-ee6ba8a10f5e"
+        }
       ]
     },
     {
@@ -82,7 +106,18 @@ const initialState: ProductsState = {
         }
       ],
       price: 80,
-      sizes: [{ size: "24", reserved: false }, { size: "26", reserved: true }]
+      sizes: [
+        {
+          size: "24",
+          reserved: false,
+          id: "268860f1-ef57-530e-af23-01f7f05826d3"
+        },
+        {
+          size: "26",
+          reserved: true,
+          id: "db5186f0-6088-5c07-bd6d-5cd372ac9a4f"
+        }
+      ]
     },
     {
       id: "1818b6ee-89a6-5ae3-8715-71d1dfda9223",
@@ -108,9 +143,21 @@ const initialState: ProductsState = {
       ],
       price: 130,
       sizes: [
-        { size: "36", reserved: false },
-        { size: "38", reserved: false },
-        { size: "40", reserved: false }
+        {
+          size: "36",
+          reserved: false,
+          id: "1ed1b412-f67c-523b-bff8-098c651cb2e2"
+        },
+        {
+          size: "38",
+          reserved: false,
+          id: "e02a5d95-66e8-51e0-b222-10de709d50a9"
+        },
+        {
+          size: "40",
+          reserved: false,
+          id: "2f2a90a4-9318-56dc-9cda-55bfe2e15ebd"
+        }
       ]
     },
     {
@@ -129,9 +176,21 @@ const initialState: ProductsState = {
       ],
       price: 130,
       sizes: [
-        { size: "80/86", reserved: false },
-        { size: "116", reserved: false },
-        { size: "128", reserved: false }
+        {
+          size: "80/86",
+          reserved: false,
+          id: "e5c6a9fb-fe1f-5a8c-a724-b676a51962ae"
+        },
+        {
+          size: "116",
+          reserved: false,
+          id: "cc29ba10-fdce-5949-9c14-4af3923c0010"
+        },
+        {
+          size: "128",
+          reserved: false,
+          id: "9b0c8f2f-c2f9-52d7-af33-4ef65cf4ebbd"
+        }
       ]
     },
     {
@@ -156,7 +215,18 @@ const initialState: ProductsState = {
         }
       ],
       price: 80,
-      sizes: [{ size: "24", reserved: false }, { size: "26", reserved: false }]
+      sizes: [
+        {
+          size: "24",
+          reserved: false,
+          id: "57a59f06-3627-5f43-bd24-0680bcb10164"
+        },
+        {
+          size: "26",
+          reserved: false,
+          id: "7ff60acc-bf61-599a-bbcd-ba550c7cdb58"
+        }
+      ]
     }
   ],
   loading: false,
@@ -212,19 +282,26 @@ export const getProductsByCategories = createSelector(
 );
 
 export const getProductById = (id: string) => {
-  return createSelector(getProducts, (state: Product[]) => {
-    return state.find(product => product.id === id);
-  });
+  return createSelector(
+    getProducts,
+    (state: Product[]) => {
+      return state.find(product => product.id === id);
+    }
+  );
 };
 
-export const getNewProducts = createSelector(getProducts, (state: Product[]) =>
-  state.filter(product => product.newOffer)
+export const getNewProducts = createSelector(
+  getProducts,
+  (state: Product[]) => state.filter(product => product.newOffer)
 );
 
 export const getProductAvailableSizes = (id: string) => {
-  return createSelector(getProducts, (state: Product[]) => {
-    return state
-      .find(product => product.id === id)
-      .sizes.filter(size => size.reserved === false);
-  });
+  return createSelector(
+    getProducts,
+    (state: Product[]) => {
+      return state
+        .find(product => product.id === id)
+        .sizes.filter(size => size.reserved === false);
+    }
+  );
 };

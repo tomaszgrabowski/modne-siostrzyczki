@@ -7,7 +7,7 @@ import {
   getOrderProducts
 } from "src/store/reducers";
 import { Observable } from "rxjs";
-import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { faTrashAlt, faMoneyCheckAlt } from "@fortawesome/free-solid-svg-icons";
 import * as fromActions from "src/store/actions";
 
 @Component({
@@ -19,6 +19,7 @@ export class CartComponent implements OnInit {
   private products: Observable<Product[]>;
   private productsCount: Observable<number>;
   private faTrash = faTrashAlt;
+  private faMoneyCheckAlt = faMoneyCheckAlt;
 
   constructor(private store: Store<AppState>) {}
 
@@ -27,7 +28,7 @@ export class CartComponent implements OnInit {
     this.productsCount = this.store.select(getOrderProductsCount);
   }
 
-  private remove(product: Product): void{
+  private remove(product: Product): void {
     this.store.dispatch(new fromActions.RemoveProductFromOrder(product));
   }
 }

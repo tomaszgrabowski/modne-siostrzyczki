@@ -13,5 +13,6 @@ export interface Product{
   category: Category;
   newOffer: boolean;
   choosenSize?: string;
+  choosenId?: string;
 }
 

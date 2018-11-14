@@ -1,4 +1,5 @@
 export interface ProductSize{
   size: string,
-  reserved: boolean
+  reserved: boolean,
+  id: string
 }

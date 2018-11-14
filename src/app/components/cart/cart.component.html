@@ -10,11 +10,17 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let product of products | async">
-          <th scope="row"><img [src]="product.photos[0].url" class="img-thumbnail"/></th>
-          <td>{{product.name}}</td>
-          <td>{{product.choosenSize}}</td>
-          <td><button class="btn btn-danger" (click)="remove(product)"><fa-icon [icon]="faTrash"></fa-icon></button></td>
+        <tr *ngFor="let product of (products | async)">
+          <th scope="row">
+            <img [src]="product.photos[0].url" class="img-thumbnail" />
+          </th>
+          <td>{{ product.name }}</td>
+          <td>{{ product.choosenSize }}</td>
+          <td>
+            <button class="btn btn-danger" (click)="remove(product)">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -22,6 +28,9 @@
       <ngb-alert type="info" [dismissible]="false">
         Aktualnie twój koszyk jest pusty, dodaj coś do niego!
       </ngb-alert>
+    </p>
+    <p *ngIf="(productsCount | async) !== 0">
+      <button type="button" class="btn btn-primary"><fa-icon [icon]="faMoneyCheckAlt"></fa-icon> Złóż zamówienie</button>
     </p>
   </div>
 </div>
