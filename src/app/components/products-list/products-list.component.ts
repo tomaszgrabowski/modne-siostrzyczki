@@ -2,6 +2,7 @@ import { Component, OnInit, HostBinding } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import * as fromReducers from "src/store/reducers";
+import * as fromActions from "src/store/actions";
 import { getNewProducts } from "src/store/reducers/products.reducer";
 import { Product } from "src/models";
 
@@ -20,6 +21,7 @@ export class ProductsListComponent implements OnInit {
   constructor(private store: Store<fromReducers.AppState>) {}
 
   ngOnInit() {
+    this.store.dispatch(new fromActions.LoadProducts());
     this.products = this.store.select(getNewProducts);
     this.products.subscribe(
       products => (this.amount = products.length)

@@ -4,7 +4,8 @@ import { Store } from "@ngrx/store";
 import {
   AppState,
   getOrderProductsCount,
-  getOrderProducts
+  getOrderProducts,
+  getOrder
 } from "src/store/reducers";
 import { Observable } from "rxjs";
 import { faTrashAlt, faMoneyCheckAlt } from "@fortawesome/free-solid-svg-icons";
@@ -30,5 +31,13 @@ export class CartComponent implements OnInit {
 
   private remove(product: Product): void {
     this.store.dispatch(new fromActions.RemoveProductFromOrder(product));
+  }
+
+  private placeOrder(): void {
+    // const order = this.store
+    //   .select(getOrder)
+    //   .subscribe(order =>
+    //     this.store.dispatch(new fromActions.PlaceOrder(order))
+    //   );
   }
 }

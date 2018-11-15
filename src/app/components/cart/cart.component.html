@@ -30,7 +30,7 @@
       </ngb-alert>
     </p>
     <p *ngIf="(productsCount | async) !== 0">
-      <button type="button" class="btn btn-primary"><fa-icon [icon]="faMoneyCheckAlt"></fa-icon> Złóż zamówienie</button>
+      <button type="button" class="btn btn-primary" (click)="placeOrder()"><fa-icon [icon]="faMoneyCheckAlt"></fa-icon> Złóż zamówienie</button>
     </p>
   </div>
 </div>

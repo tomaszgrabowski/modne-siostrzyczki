@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 
 import { AppComponent } from "./app.component";
 import { StoreModule } from "@ngrx/store";
+import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { appReducer } from "src/store/reducers";
 import { ProductsListComponent } from "./components/products-list/products-list.component";
@@ -20,6 +21,8 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ToastrModule } from "ngx-toastr";
 
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { ProductsEffects } from "src/store/effects/products.effects";
+import { HttpClientModule } from "@angular/common/http";
 
 const routes: Routes = [
   { path: "", component: ProductsListComponent, pathMatch: "full" },
@@ -57,7 +60,9 @@ const routes: Routes = [
       preventDuplicates: true,
       progressAnimation: "decreasing",
       progressBar: true,
-    })
+    }),
+    EffectsModule.forRoot([ProductsEffects]),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

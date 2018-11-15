@@ -42,13 +42,13 @@ export function ordersReducer(
       return {
         data: {
           ...state.data,
-          products: [...state.data.products, <Product>action.payload]
+          products: [...state.data.products, (<fromActions.AddProductToOrder>action).payload]
         },
         loaded: true,
         loading: true
       };
     case fromActions.REMOVE_PRODUCT_FROM_ORDER:
-      const index = state.data.products.indexOf(<Product>action.payload);
+      const index = state.data.products.indexOf((<fromActions.RemoveProductFromOrder>action).payload);
       state.data.products.splice(index,1);
 
       return {
@@ -59,6 +59,13 @@ export function ordersReducer(
         loaded: true,
         loading: true
       };
+    case fromActions.PLACE_ORDER:
+      //send order to db and email
+      //clean order
+      return state;
+
+    case fromActions.CLEAN_ORDER:
+      return initialState;
   }
 
   return state;
