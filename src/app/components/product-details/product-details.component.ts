@@ -8,7 +8,7 @@ import {
   getProductAvailableSizes,
   getOrder
 } from "src/store/reducers";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { faFire } from "@fortawesome/free-solid-svg-icons";
 import { ToastrService } from "ngx-toastr";
 
@@ -29,7 +29,8 @@ export class ProductDetailsComponent implements OnInit {
   constructor(
     private store: Store<fromReducers.AppState>,
     private route: ActivatedRoute,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -62,5 +63,6 @@ export class ProductDetailsComponent implements OnInit {
       })
     );
     this.toastr.success("Produkt dodano do koszyka...");
+    this.router.navigate(["/"]);
   }
 }
