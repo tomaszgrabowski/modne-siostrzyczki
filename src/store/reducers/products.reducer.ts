@@ -21,23 +21,23 @@ export function productsReducer(
 ): ProductsState {
   switch (action.type) {
     case fromActions.LOAD_PRODUCTS:
-      ({
+      return{
         ...state,
         loading: true,
         loaded: false
-      });
+      };
     case fromActions.LOAD_PRODUCTS_ERROR:
-      ({
+      return {
         ...state,
         loading: false,
         loaded: false
-      });
+      };
     case fromActions.LOAD_PRODUCTS_SUCCESS:
-      ({
-        ...state.data = (<LoadProductsSuccess>action).payload,
+      return {
+        data : (<LoadProductsSuccess>action).payload,
         loading: false,
         loaded: true
-      });
+      };
   }
 
   return state;
