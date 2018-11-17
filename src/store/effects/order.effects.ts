@@ -5,23 +5,23 @@ import { Injectable } from "@angular/core";
 import * as fromActions from "src/store/actions";
 import { switchMap, map } from "rxjs/operators";
 import { HttpService } from "src/app/services/httpService";
-import { Product } from "src/models";
+import { Order } from "src/models";
 
 @Injectable()
-export class ProductsEffects {
+export class OrderEffects {
   constructor(
     private actions: Actions,
     private productsService: HttpService
   ) {}
 
   @Effect()
-  loadProducts: Observable<Action> = this.actions
-    .ofType(fromActions.LOAD_PRODUCTS)
+  placeOrder: Observable<Action> = this.actions
+    .ofType(fromActions.PLACE_ORDER)
     .pipe(
-      switchMap(() => {
-        return this.productsService.get("products").pipe(
-          map((products: Product[]) => {
-            return new fromActions.LoadProductsSuccess(products);
+      switchMap((order) => {
+        return this.productsService.post("orders", (<fromActions.PlaceOrder>order).payload).pipe(
+          map((order: Order) => {
+            return null;
           })
         );
       })

@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Product } from "src/models";
 import { Store } from "@ngrx/store";
+import { ToastrService } from "ngx-toastr";
 import {
   AppState,
   getOrderProductsCount,
@@ -22,7 +23,7 @@ export class CartComponent implements OnInit {
   private faTrash = faTrashAlt;
   private faMoneyCheckAlt = faMoneyCheckAlt;
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<AppState>, private toastr: ToastrService) {}
 
   ngOnInit() {
     this.products = this.store.select(getOrderProducts);
@@ -34,10 +35,9 @@ export class CartComponent implements OnInit {
   }
 
   private placeOrder(): void {
-    // const order = this.store
-    //   .select(getOrder)
-    //   .subscribe(order =>
-    //     this.store.dispatch(new fromActions.PlaceOrder(order))
-    //   );
+    this.store.select(getOrder).subscribe(order => {
+      this.store.dispatch(new fromActions.PlaceOrder(order));
+      this.toastr.success("Złożono zamówienie...");
+    });
   }
 }

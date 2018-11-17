@@ -1,4 +1,4 @@
-import { Product, Category } from "src/models";
+import { Product } from "src/models";
 import * as fromActions from "../actions/";
 import { createSelector, createFeatureSelector } from "@ngrx/store";
 import { LoadProductsSuccess } from "../actions/";

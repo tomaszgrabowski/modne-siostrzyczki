@@ -16,17 +16,17 @@ const initialState: OrderState = {
     products: [],
     user: {
       address: {
-        city: "",
-        country: "",
-        number: "",
-        street: "",
-        zip: ""
+        city: "Gdańsk",
+        country: "Polska",
+        number: "24/35",
+        street: "Guderskiego",
+        zip: "80-180"
       },
-      email: "",
-      id: "",
-      name: "",
-      phone: "",
-      surname: ""
+      email: "tomaszgrabowski07@gmail.com",
+      id: "f2478c28-9329-5fd0-a7b0-35eb8de6eb80",
+      name: "Tomasz",
+      phone: "501466878",
+      surname: "Grabowski"
     }
   },
   loading: false,

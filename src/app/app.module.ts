@@ -23,6 +23,7 @@ import { ToastrModule } from "ngx-toastr";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { ProductsEffects } from "src/store/effects/products.effects";
 import { HttpClientModule } from "@angular/common/http";
+import { OrderEffects } from "src/store/effects/order.effects";
 
 const routes: Routes = [
   { path: "", component: ProductsListComponent, pathMatch: "full" },
@@ -61,7 +62,7 @@ const routes: Routes = [
       progressAnimation: "decreasing",
       progressBar: true,
     }),
-    EffectsModule.forRoot([ProductsEffects]),
+    EffectsModule.forRoot([ProductsEffects, OrderEffects]),
     HttpClientModule
   ],
   providers: [],
