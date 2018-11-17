@@ -63,6 +63,9 @@ export class ProductDetailsComponent implements OnInit {
       })
     );
     this.toastr.success("Produkt dodano do koszyka...");
+  }
+
+  private backToProductsList(): void {
     this.router.navigate(["/"]);
   }
 }
