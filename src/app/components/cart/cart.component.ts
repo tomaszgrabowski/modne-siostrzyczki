@@ -6,7 +6,8 @@ import {
   AppState,
   getOrderProductsCount,
   getOrderProducts,
-  getOrder
+  getOrder,
+  getUser
 } from "src/store/reducers";
 import { Observable } from "rxjs";
 import { faTrashAlt, faMoneyCheckAlt } from "@fortawesome/free-solid-svg-icons";
@@ -36,8 +37,11 @@ export class CartComponent implements OnInit {
 
   private placeOrder(): void {
     this.store.select(getOrder).subscribe(order => {
-      this.store.dispatch(new fromActions.PlaceOrder(order));
-      this.toastr.success("Złożono zamówienie...");
-    });
+      this.store.select(getUser).subscribe(user => {
+        order.user = user;
+        this.store.dispatch(new fromActions.PlaceOrder(order));
+        this.toastr.success("Złożono zamówienie...");
+      }).unsubscribe();
+    }).unsubscribe();
   }
 }

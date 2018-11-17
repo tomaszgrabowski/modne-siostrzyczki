@@ -6,4 +6,5 @@ export interface User {
   address: DeliveryAddress;
   email: string;
   phone: string;
+  token?: string
 }

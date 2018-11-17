@@ -13,21 +13,7 @@ const initialState: OrderState = {
     date: "",
     deliveryAddress: null,
     id: "",
-    products: [],
-    user: {
-      address: {
-        city: "Gdańsk",
-        country: "Polska",
-        number: "24/35",
-        street: "Guderskiego",
-        zip: "80-180"
-      },
-      email: "tomaszgrabowski07@gmail.com",
-      id: "f2478c28-9329-5fd0-a7b0-35eb8de6eb80",
-      name: "Tomasz",
-      phone: "501466878",
-      surname: "Grabowski"
-    }
+    products: []
   },
   loading: false,
   loaded: false
@@ -42,14 +28,20 @@ export function ordersReducer(
       return {
         data: {
           ...state.data,
-          products: [...state.data.products, (<fromActions.AddProductToOrder>action).payload]
+          products: [
+            ...state.data.products,
+            (<fromActions.AddProductToOrder>action).payload
+          ]
         },
         loaded: true,
         loading: true
       };
+
     case fromActions.REMOVE_PRODUCT_FROM_ORDER:
-      const index = state.data.products.indexOf((<fromActions.RemoveProductFromOrder>action).payload);
-      state.data.products.splice(index,1);
+      const index = state.data.products.indexOf(
+        (<fromActions.RemoveProductFromOrder>action).payload
+      );
+      state.data.products.splice(index, 1);
 
       return {
         data: {
@@ -59,9 +51,8 @@ export function ordersReducer(
         loaded: true,
         loading: true
       };
+
     case fromActions.PLACE_ORDER:
-      //send order to db and email
-      //clean order
       return state;
 
     case fromActions.CLEAN_ORDER:
@@ -91,12 +82,12 @@ export const getGruppedOrderProducts = createSelector(
       prev[next.choosenSize].push(next);
       return prev;
     }, {});
-    return Object.keys(gruppedProducts).map(key=> {
+    return Object.keys(gruppedProducts).map(key => {
       return {
         key,
         value: gruppedProducts[key]
-      }
-    })
+      };
+    });
   }
 );
 

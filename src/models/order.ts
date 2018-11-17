@@ -6,6 +6,6 @@ export interface Order{
   id: string;
   date: string;
   products: Product[];
-  user: User;
+  user?: User;
   deliveryAddress?: DeliveryAddress;
 }
