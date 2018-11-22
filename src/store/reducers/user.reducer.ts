@@ -53,6 +53,12 @@ export function userReducer(
         loading: true,
         data: null
       };
+    case fromActions.LOGOUT_USER:
+      return {
+        loaded: true,
+        loading: true,
+        data: null
+      };
   }
 
   return state;

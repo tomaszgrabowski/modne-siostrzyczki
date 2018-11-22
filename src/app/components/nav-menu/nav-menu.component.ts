@@ -6,8 +6,10 @@ import {
   faMoneyCheckAlt
 } from "@fortawesome/free-solid-svg-icons";
 import * as fromReducers from "src/store/reducers";
+import * as fromActions from "src/store/actions";
 import { Store } from "@ngrx/store";
 import { tap, delay } from "rxjs/operators";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-nav-menu",
@@ -24,7 +26,10 @@ export class NavMenuComponent implements OnInit {
   private countClass: string[];
   private isLoggedIn: boolean;
 
-  constructor(private store: Store<fromReducers.AppState>) {}
+  constructor(
+    private store: Store<fromReducers.AppState>,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.store
@@ -43,5 +48,10 @@ export class NavMenuComponent implements OnInit {
     this.store
       .select(fromReducers.isLoggedIn)
       .subscribe(isLoggedIn => (this.isLoggedIn = isLoggedIn));
+  }
+
+  onLogout(): void {
+    this.store.dispatch(new fromActions.LogoutUser());
+    this.router.navigate(["/"]);
   }
 }
