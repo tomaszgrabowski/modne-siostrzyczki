@@ -26,6 +26,8 @@ import { HttpClientModule } from "@angular/common/http";
 import { OrderEffects } from "src/store/effects/order.effects";
 import { LoginComponent } from "./components/login/login.component";
 import { UserEffects } from "src/store/effects/user.effects";
+import { RegisterComponent } from './components/register/register.component';
+import { FormsModule } from "@angular/forms";
 
 const routes: Routes = [
   { path: "", component: ProductsListComponent, pathMatch: "full" },
@@ -34,6 +36,7 @@ const routes: Routes = [
   { path: "cart", component: CartComponent },
   { path: "checkout", component: OrderComponent },
   { path: "login", component: LoginComponent },
+  { path: "register", component: RegisterComponent },
   { path: "**", component: ProductsListComponent }
 ];
 
@@ -48,7 +51,8 @@ const routes: Routes = [
     CartComponent,
     OrderComponent,
     ProductDetailsComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +72,8 @@ const routes: Routes = [
       progressBar: true
     }),
     EffectsModule.forRoot([ProductsEffects, OrderEffects, UserEffects]),
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
