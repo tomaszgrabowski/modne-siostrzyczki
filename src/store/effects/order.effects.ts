@@ -16,7 +16,7 @@ export class OrderEffects {
     .pipe(
       switchMap(order => {
         return this.productsService
-          .post("orders", (<fromActions.PlaceOrder>order).payload)
+          .post(HttpService.ordersRoute, (<fromActions.PlaceOrder>order).payload)
           .pipe(
             map(() => {
               return new fromActions.CleanOrder();

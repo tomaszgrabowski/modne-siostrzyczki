@@ -1,24 +1,28 @@
 import { Action } from "@ngrx/store";
+import { User } from "src/models";
 
 export const REGISTER_USER = "[USER] Register User";
-export const CHECK_USER = "[USER] Check User";
-export const LOAD_USER = "[USER] Load User";
-export const GET_USER = "[USER] Get User";
 
-export class GetUser implements Action{
-  type: string = GET_USER;
-}
-
-export class CheckUser implements Action{
-  type: string = CHECK_USER;
-}
+export const LOGIN_USER = "[USER] Login User";
+export const LOGIN_USER_SUCCESS = "[USER] Login User Success";
+export const LOGIN_USER_FAIL = "[USER] Login User Success";
 
 export class RegisterUser implements Action{
-  type: string = REGISTER_USER;
+  public readonly type: string = REGISTER_USER;
+  constructor(public payload: User){}
 }
 
-export class LoadUser implements Action{
-  type: string = LOAD_USER;
+export class LoginUser implements Action{
+  public readonly type: string = LOGIN_USER;
+  constructor(public payload: User){}
+}
+export class LoginUserSuccess implements Action{
+  type: string = LOGIN_USER_SUCCESS;
+  constructor(public payload: User){}
 }
 
-export type UserActions = GetUser | CheckUser | RegisterUser | LoadUser;
+export class LoginUserFail implements Action{
+  type: string = LOGIN_USER_FAIL;
+}
+
+export type UserActions = LoginUser | RegisterUser | LoginUserSuccess | LoginUserFail;

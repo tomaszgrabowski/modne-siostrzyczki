@@ -1,26 +1,53 @@
 <ul class="nav justify-content-center nav-fill w-100">
   <li class="nav-item">
-    <a class="nav-link" [routerLink]="['/']" [routerLinkActive]="activeRouteBorderStyle" [routerLinkActiveOptions]="{exact: true}">
+    <a
+      class="nav-link"
+      [routerLink]="['/']"
+      [routerLinkActive]="activeRouteBorderStyle"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
       <fa-icon [icon]="faHome"></fa-icon>
       Home
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" [routerLink]="['/contact']" [routerLinkActive]="activeRouteBorderStyle">
+    <a
+      class="nav-link"
+      [routerLink]="['/contact']"
+      [routerLinkActive]="activeRouteBorderStyle"
+    >
       <fa-icon [icon]="faEvenlope"></fa-icon>
       Kontakt
     </a>
   </li>
   <li [ngClass]="countClass" class="nav-item">
-    <a class="nav-link" [routerLink]="['/cart']" [routerLinkActive]="activeRouteBorderStyle">
+    <a
+      class="nav-link"
+      [routerLink]="['/cart']"
+      [routerLinkActive]="activeRouteBorderStyle"
+    >
       <fa-icon [icon]="faShoppingCart"></fa-icon>
-      Koszyk ({{productsInCart}})
+      Koszyk ({{ productsInCart }})
     </a>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" [routerLink]="['/checkout']" [routerLinkActive]="activeRouteBorderStyle">
+  <li class="nav-item" *ngIf="!isLoggedIn">
+    <a
+      class="nav-link"
+      [routerLink]="['/login']"
+      [routerLinkActive]="activeRouteBorderStyle"
+    >
       <fa-icon [icon]="faMoneyCheckAlt"></fa-icon>
-      Zamówienie
+      Login
+    </a>
+  </li>
+  <li class="nav-item" *ngIf="!isLoggedIn">
+    <a
+      class="nav-link"
+      [routerLink]="['/register']"
+      [routerLinkActive]="activeRouteBorderStyle"
+    >
+      <fa-icon [icon]="faMoneyCheckAlt"></fa-icon>
+      Rejestracja
     </a>
   </li>
 </ul>

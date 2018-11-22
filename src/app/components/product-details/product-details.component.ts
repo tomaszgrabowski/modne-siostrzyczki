@@ -38,6 +38,9 @@ export class ProductDetailsComponent implements OnInit {
     this.orderDisabled = true;
     this.route.params.subscribe(params => (this.id = params["id"]));
     this.store.select(getProductById(this.id)).subscribe(product => {
+      if(!product){
+        this.router.navigate(["/"]);
+      }
       this.product = product;
       this.choosenImage = product.photos.find(image => image.thumbnail).url;
     });

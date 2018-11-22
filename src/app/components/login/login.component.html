@@ -1,0 +1,43 @@
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="userName" class="col-form-label">Login</label>
+      <input
+        type="text"
+        class="form-control"
+        id="userName"
+        name="userName"
+        #userName
+      />
+    </div>
+    <div class="form-group">
+      <label for="password" class="col-form-label">Hasło</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        name="password"
+        #password
+      />
+    </div>
+    <div class="alert alert-danger" *ngIf="counter > 0">
+      Login lub hasło nie pasują.
+    </div>
+    <div class="alert alert-info" *ngIf="counter == 2">
+      Nie pamiętasz hasła? Użyj przycisku "Resetuj hasło".
+    </div>
+    <div class="form-group">
+      <button
+        class="btn btn-primary"
+        type="submit"
+        (click)="onSubmit(userName.value, password.value)"
+      >
+        Zaloguj
+      </button>
+      &nbsp;
+      <button class="btn" type="submit" (click)="onRemindMe(userName.value)">
+        Resetuj hasło
+      </button>
+    </div>
+  </div>
+</div>

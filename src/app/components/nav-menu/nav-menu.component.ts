@@ -5,7 +5,7 @@ import {
   faShoppingCart,
   faMoneyCheckAlt
 } from "@fortawesome/free-solid-svg-icons";
-import { AppState, getOrderProductsCount } from "src/store/reducers";
+import * as fromReducers from "src/store/reducers";
 import { Store } from "@ngrx/store";
 import { tap, delay } from "rxjs/operators";
 
@@ -22,19 +22,26 @@ export class NavMenuComponent implements OnInit {
   private faMoneyCheckAlt = faMoneyCheckAlt;
   private productsInCart: number;
   private countClass: string[];
+  private isLoggedIn: boolean;
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<fromReducers.AppState>) {}
 
   ngOnInit() {
-    this.store.select(getOrderProductsCount).pipe(
-      tap(val => {
-        this.productsInCart = val;
-        this.countClass = ["nav-item", "pop-out"];
-      }),
-      delay(300),
-      tap(val => {
-        this.countClass = ["nav-item"];
-      })
-    ).subscribe(count=>this.productsInCart = count);
+    this.store
+      .select(fromReducers.getOrderProductsCount)
+      .pipe(
+        tap(val => {
+          this.productsInCart = val;
+          this.countClass = ["nav-item", "pop-out"];
+        }),
+        delay(300),
+        tap(val => {
+          this.countClass = ["nav-item"];
+        })
+      )
+      .subscribe(count => (this.productsInCart = count));
+    this.store
+      .select(fromReducers.isLoggedIn)
+      .subscribe(isLoggedIn => (this.isLoggedIn = isLoggedIn));
   }
 }

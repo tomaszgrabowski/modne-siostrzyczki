@@ -3,7 +3,7 @@ import { NgModule } from "@angular/core";
 
 import { AppComponent } from "./app.component";
 import { StoreModule } from "@ngrx/store";
-import { EffectsModule } from '@ngrx/effects';
+import { EffectsModule } from "@ngrx/effects";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { appReducer } from "src/store/reducers";
 import { ProductsListComponent } from "./components/products-list/products-list.component";
@@ -24,13 +24,17 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { ProductsEffects } from "src/store/effects/products.effects";
 import { HttpClientModule } from "@angular/common/http";
 import { OrderEffects } from "src/store/effects/order.effects";
+import { LoginComponent } from "./components/login/login.component";
+import { UserEffects } from "src/store/effects/user.effects";
 
 const routes: Routes = [
   { path: "", component: ProductsListComponent, pathMatch: "full" },
   { path: "product/:id", component: ProductDetailsComponent },
   { path: "contact", component: ContactComponent },
   { path: "cart", component: CartComponent },
-  { path: "checkout", component: OrderComponent }
+  { path: "checkout", component: OrderComponent },
+  { path: "login", component: LoginComponent },
+  { path: "**", component: ProductsListComponent }
 ];
 
 @NgModule({
@@ -43,7 +47,8 @@ const routes: Routes = [
     NavMenuComponent,
     CartComponent,
     OrderComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -60,9 +65,9 @@ const routes: Routes = [
       positionClass: "toast-bottom-right",
       preventDuplicates: true,
       progressAnimation: "decreasing",
-      progressBar: true,
+      progressBar: true
     }),
-    EffectsModule.forRoot([ProductsEffects, OrderEffects]),
+    EffectsModule.forRoot([ProductsEffects, OrderEffects, UserEffects]),
     HttpClientModule
   ],
   providers: [],

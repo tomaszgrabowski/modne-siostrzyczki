@@ -19,7 +19,7 @@ export class ProductsEffects {
     .ofType(fromActions.LOAD_PRODUCTS)
     .pipe(
       switchMap(() => {
-        return this.productsService.get("products").pipe(
+        return this.productsService.get(HttpService.productsRoute).pipe(
           map((products: Product[]) => {
             return new fromActions.LoadProductsSuccess(products);
           })
