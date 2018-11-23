@@ -7,11 +7,13 @@ import {
   getOrderProductsCount,
   getOrderProducts,
   getOrder,
-  getUser
+  getUser,
+  isLoggedIn
 } from "src/store/reducers";
 import { Observable } from "rxjs";
 import { faTrashAlt, faMoneyCheckAlt } from "@fortawesome/free-solid-svg-icons";
 import * as fromActions from "src/store/actions";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-cart",
@@ -23,12 +25,14 @@ export class CartComponent implements OnInit {
   private productsCount: Observable<number>;
   private faTrash = faTrashAlt;
   private faMoneyCheckAlt = faMoneyCheckAlt;
+  private isLoggedIn: Observable<boolean>;
 
-  constructor(private store: Store<AppState>, private toastr: ToastrService) {}
+  constructor(private store: Store<AppState>, private toastr: ToastrService, private router: Router) {}
 
   ngOnInit() {
     this.products = this.store.select(getOrderProducts);
     this.productsCount = this.store.select(getOrderProductsCount);
+    this.isLoggedIn =  this.store.select(isLoggedIn);
   }
 
   private remove(product: Product): void {
@@ -41,6 +45,7 @@ export class CartComponent implements OnInit {
         order.user = user;
         this.store.dispatch(new fromActions.PlaceOrder(order));
         this.toastr.success("Złożono zamówienie...");
+        this.router.navigate(["/"]);//strona podziękowań?
       }).unsubscribe();
     }).unsubscribe();
   }
