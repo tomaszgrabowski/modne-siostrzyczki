@@ -1,6 +1,6 @@
 <div class="row justify-content-center">
   <div class="col-md-6">
-    <form (ngSubmit)="onSubmit(registerForm.value)" #registerForm="ngForm">
+    <form (ngSubmit)="onSubmit(registerForm)" #registerForm="ngForm">
       <div class="form-group">
         <label for="userName" class="col-form-label">Email</label>
         <input
@@ -8,10 +8,18 @@
           class="form-control"
           id="email"
           name="email"
-          ngModel
           required
+          email
+          ngModel
+          #email="ngModel"
         />
       </div>
+      <span
+        class="validation"
+        *ngIf="email.invalid && (email.dirty || email.touched)"
+        >* to pole musi zawierać poprawny adres email.</span
+      >
+
       <div class="form-group">
         <label for="name" class="col-form-label">Imię</label>
         <input
@@ -21,7 +29,13 @@
           name="name"
           ngModel
           required
+          #name="ngModel"
         />
+        <span
+          class="validation"
+          *ngIf="name.invalid && (name.dirty || name.touched)"
+          >* to pole jest wymagane.</span
+        >
       </div>
       <div class="form-group">
         <label for="surname" class="col-form-label">Nazwisko</label>
@@ -32,18 +46,30 @@
           name="surname"
           ngModel
           required
+          #surname="ngModel"
         />
+        <span
+          class="validation"
+          *ngIf="surname.invalid && (surname.dirty || surname.touched)"
+          >* to pole jest wymagane.</span
+        >
       </div>
       <div class="form-group">
         <label for="phone" class="col-form-label">Telefon</label>
         <input
-          type="text"
+          type="tel"
           class="form-control"
           id="phone"
           name="phone"
           ngModel
           required
+          #phone="ngModel"
         />
+        <span
+          class="validation"
+          *ngIf="phone.invalid && (phone.dirty || phone.touched)"
+          >* to pole jest wymagae.</span
+        >
         <div class="form-group">
           <label for="password" class="col-form-label">Hasło</label>
           <input
@@ -53,8 +79,17 @@
             name="password"
             ngModel
             required
-            ([ngModel])="(password)"
+            #password
+            #passwordValidation="ngModel"
           />
+          <span
+            class="validation"
+            *ngIf="
+              passwordValidation.invalid &&
+              (passwordValidation.dirty || passwordValidation.touched)
+            "
+            >* to pole jest wymagane.</span
+          >
         </div>
         <div class="form-group">
           <label for="passwordConfirm" class="col-form-label"
@@ -67,8 +102,117 @@
             name="passwordConfirm"
             ngModel
             required
-            ([ngModel])="(passwordConfirm)"
+            passwordEqual
+            [password]="password.value"
+            #passwordConfirm="ngModel"
           />
+          <span
+            class="validation"
+            *ngIf="
+              passwordConfirm.invalid &&
+              (passwordConfirm.dirty || passwordConfirm.touched)
+            "
+            >* hasla nie są jednakowe</span
+          >
+        </div>
+        <!-- adres -->
+        <div class="form-group">
+          <label for="country" class="col-form-label">Państwo</label>
+          <input
+            type="text"
+            class="form-control"
+            id="country"
+            name="country"
+            ngModel
+            required
+            #country="ngModel"
+          />
+          <span
+            class="validation"
+            *ngIf="country.invalid && (country.dirty || country.touched)"
+            >* to pole jest wymagane</span
+          >
+        </div>
+        <div class="form-group">
+          <label for="city" class="col-form-label">Miasto</label>
+          <input
+            type="text"
+            class="form-control"
+            id="city"
+            name="city"
+            ngModel
+            required
+            #city="ngModel"
+          />
+          <span
+            class="validation"
+            *ngIf="
+              city.invalid &&
+              (city.dirty || city.touched)
+            "
+            >* to pole jest wymagane</span
+          >
+        </div>
+        <div class="form-group">
+          <label for="street" class="col-form-label">Ulica</label>
+          <input
+            type="text"
+            class="form-control"
+            id="street"
+            name="street"
+            ngModel
+            required
+            #street="ngModel"
+          />
+          <span
+          class="validation"
+          *ngIf="
+            street.invalid &&
+            (street.dirty || street.touched)
+          "
+          >* to pole jest wymagane</span
+        >
+        </div>
+        <div class="form-group">
+          <label for="number" class="col-form-label">Numer</label>
+          <input
+            type="text"
+            class="form-control"
+            id="number"
+            name="number"
+            ngModel
+            required
+            #number="ngModel"
+          />
+          <span
+          class="validation"
+          *ngIf="
+            number.invalid &&
+            (number.dirty || number.touched)
+          "
+          >* to pole jest wymagane</span
+        >
+        </div>
+        <div class="form-group">
+          <label for="zip" class="col-form-label">Kod pocztowy</label>
+          <input
+            type="text"
+            class="form-control"
+            id="zip"
+            name="zip"
+            ngModel
+            required
+            zipNumber
+            #zip="ngModel"
+          />
+          <span
+          class="validation"
+          *ngIf="
+            zip.invalid &&
+            (zip.dirty || zip.touched)
+          "
+          >* to pole jest wymagane</span
+        >
         </div>
         <div class="form-group">
           <button class="btn btn-primary" type="submit">Zarejestruj</button>
