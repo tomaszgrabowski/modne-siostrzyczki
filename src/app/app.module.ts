@@ -40,7 +40,7 @@ const routes: Routes = [
   { path: "checkout", component: OrderComponent },
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
-  { path: "admin/add-product", component: ProductAddComponent}
+  { path: "admin/add-product", component: ProductAddComponent},
   { path: "**", component: ProductsListComponent }
 ];
 
