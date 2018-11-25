@@ -1,6 +1,6 @@
 <div class="row justify-content-center">
   <div class="col-md-6">
-    <form (ngSubmit)="onSubmit(registerForm)" #registerForm="ngForm">
+    <form (ngSubmit)="onSubmit(registerForm.value)" #registerForm="ngForm">
       <div class="form-group">
         <label for="userName" class="col-form-label">Email</label>
         <input

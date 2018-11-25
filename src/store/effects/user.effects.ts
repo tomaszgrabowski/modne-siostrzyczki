@@ -3,22 +3,21 @@ import { Observable } from "rxjs";
 import { Action } from "@ngrx/store";
 import { Injectable } from "@angular/core";
 import * as fromActions from "src/store/actions";
-import { switchMap, map } from "rxjs/operators";
+import { switchMap, map, mapTo } from "rxjs/operators";
 import { HttpService } from "src/app/services/httpService";
 import { User } from "src/models";
 
 @Injectable()
 export class UserEffects {
-  constructor(private actions: Actions, private productsService: HttpService) {}
+  constructor(private actions: Actions, private httpService: HttpService) {}
 
   @Effect()
-  loadUser: Observable<Action> = this.actions
+  loginUser: Observable<Action> = this.actions
     .ofType(fromActions.LOGIN_USER)
     .pipe(
       switchMap(action => {
         const _action = <fromActions.LoginUser>action;
-        console.log("load user effect");
-        return this.productsService
+        return this.httpService
           .get(
             `${HttpService.usersRoute}?email=${
               _action.payload.email
@@ -35,4 +34,17 @@ export class UserEffects {
           );
       })
     );
+
+    @Effect()
+    registerUser: Observable<Action> = this.actions
+      .ofType(fromActions.REGISTER_USER)
+      .pipe(
+        switchMap(action => {
+          const _action = <fromActions.RegisterUser>action;
+          return this.httpService.post(HttpService.usersRoute, _action.payload)
+          .pipe(
+            mapTo(new fromActions.LoginUserSuccess(_action.payload))
+          );
+        })
+      );
 }
