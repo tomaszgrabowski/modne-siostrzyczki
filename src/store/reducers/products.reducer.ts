@@ -1,7 +1,6 @@
 import { Product } from "src/models";
 import * as fromActions from "../actions/";
 import { createSelector, createFeatureSelector } from "@ngrx/store";
-import { LoadProductsSuccess } from "../actions/";
 
 export interface ProductsState {
   data: Product[];
@@ -21,12 +20,12 @@ export function productsReducer(
 ): ProductsState {
   switch (action.type) {
     case fromActions.LOAD_PRODUCTS:
-      return{
+      return {
         ...state,
         loading: true,
         loaded: false
       };
-    case fromActions.LOAD_PRODUCTS_ERROR:
+    case fromActions.LOAD_PRODUCTS_FAIL:
       return {
         ...state,
         loading: false,
@@ -34,7 +33,21 @@ export function productsReducer(
       };
     case fromActions.LOAD_PRODUCTS_SUCCESS:
       return {
-        data : (<LoadProductsSuccess>action).payload,
+        data: (<fromActions.LoadProductsSuccess>action).payload,
+        loading: false,
+        loaded: true
+      };
+
+    case fromActions.ADD_PRODUCT:
+      return {
+        ...state,
+        loading: false,
+        loaded: true
+      };
+
+    case fromActions.ADD_PRODUCT_SUCCESS:
+      return {
+        data: [...state.data, (<fromActions.AddProduct>action).payload],
         loading: false,
         loaded: true
       };

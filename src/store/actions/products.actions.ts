@@ -3,7 +3,11 @@ import { Product } from "src/models";
 
 export const LOAD_PRODUCTS = "[PRODUCTS] Load Products";
 export const LOAD_PRODUCTS_SUCCESS = "[PRODUCTS] Load Products Success";
-export const LOAD_PRODUCTS_ERROR = "[PRODUCTS] Load Products Error";
+export const LOAD_PRODUCTS_FAIL = "[PRODUCTS] Load Products Fail";
+export const ADD_PRODUCT = "[PRODUCTS] Add Product";
+export const ADD_PRODUCT_SUCCESS = "[PRODUCTS] Add Product Sucess";
+export const ADD_PRODUCT_FAIL = "[PRODUCTS] Add Product Fail";
+
 
 export class LoadProducts implements Action {
   public readonly type: string = LOAD_PRODUCTS;
@@ -15,10 +19,30 @@ export class LoadProductsSuccess implements Action {
 }
 
 export class LoadProductsFail implements Action {
-  public readonly type: string = LOAD_PRODUCTS_ERROR;
-  constructor(public payload: any) {}
+  public readonly type: string = LOAD_PRODUCTS_FAIL;
+
+}
+
+export class AddProduct implements Action {
+  public readonly type: string = ADD_PRODUCT;
+  constructor(public payload: Product) {}
+}
+
+export class AddProductSuccess implements Action {
+  public readonly type: string = ADD_PRODUCT_SUCCESS;
+  constructor(public payload: Product) {}
+}
+
+export class AddProductFail implements Action {
+  public readonly type: string = ADD_PRODUCT_FAIL;
 }
 
 //action types
 
-export type ProductsAction = LoadProducts | LoadProductsSuccess | LoadProductsFail;
+export type ProductsAction =
+  | LoadProducts
+  | LoadProductsSuccess
+  | LoadProductsFail
+  | AddProduct
+  | AddProductSuccess
+  | AddProductFail;

@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-12">
-    <form (ngSubmit)="onSubmit(product.value)" #registerForm="ngForm">
+    <form (ngSubmit)="onSubmit(registerForm.value)" #registerForm="ngForm">
       <div class="form-group">
         <label for="name" class="col-form-label">Nazwa</label>
         <input
@@ -9,7 +9,6 @@
           id="name"
           name="name"
           required
-          email
           ngModel
           #name="ngModel"
         />
@@ -17,8 +16,7 @@
       <span
         class="validation"
         *ngIf="name.invalid && (name.dirty || name.touched)"
-        >* to pole jest wymagane.</span
-      >
+        >* to pole jest wymagane.</span>
 
       <div class="form-group">
         <label for="name" class="col-form-label">Opis</label>
@@ -70,21 +68,30 @@
         <span
           class="validation"
           *ngIf="Category.invalid && (Category.dirty || Category.touched)"
-          >* to pole jest wymagae.</span
+          >* to pole jest wymagane.</span
         >
-        <div class="form-group">
-          <label for="newOffer" class="col-form-label">Nowa oferta</label>
-          <input
-            type="checkbox"
-            class="form-control"
-            id="newOffer"
-            name="newOffer"
-          />
-        </div>
+      </div>
+      <div class="form-group">
+        <label for="sizes" class="col-form-label">Rozmiary</label>
+        <input
+          type="text"
+          class="form-control"
+          id="sizes"
+          name="sizes"
+          ngModel
+          required
+          #sizes="ngModel"
+        />
+        <span
+          class="validation"
+          *ngIf="sizes.invalid && (sizes.dirty || sizes.touched)"
+          >* to pole jest wymagane. Należy wprowadzić rozmiary rozdzielone
+          przecinkiem.</span
+        >
+      </div>
 
-        <div class="form-group">
-          <button class="btn btn-primary" type="submit">Dodaj</button>
-        </div>
+      <div class="form-group">
+        <button class="btn btn-primary" type="submit">Dodaj</button>
       </div>
     </form>
   </div>

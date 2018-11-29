@@ -9,10 +9,7 @@ import { Product } from "src/models";
 
 @Injectable()
 export class ProductsEffects {
-  constructor(
-    private actions: Actions,
-    private productsService: HttpService
-  ) {}
+  constructor(private actions: Actions, private productsService: HttpService) {}
 
   @Effect()
   loadProducts: Observable<Action> = this.actions
@@ -24,6 +21,22 @@ export class ProductsEffects {
             return new fromActions.LoadProductsSuccess(products);
           })
         );
+      })
+    );
+
+  @Effect()
+  addProducts: Observable<Action> = this.actions
+    .ofType(fromActions.ADD_PRODUCT)
+    .pipe(
+      switchMap(action => {
+        const _action = <fromActions.AddProduct>action;
+        return this.productsService
+          .post(HttpService.productsRoute, _action.payload)
+          .pipe(
+            map((product: Product) => {
+              return new fromActions.AddProductSuccess(product);
+            })
+          );
       })
     );
 }

@@ -31,6 +31,7 @@ import { FormsModule } from "@angular/forms";
 import { PasswordEqualDirective } from './directives/password-equal.directive';
 import { ZipNumberDirective } from './directives/zip-number.directive';
 import { ProductAddComponent } from './components/admin/product-add/product-add.component';
+import { SizesFiedDirective } from './directives/sizes-fied.directive';
 
 const routes: Routes = [
   { path: "", component: ProductsListComponent, pathMatch: "full" },
@@ -59,7 +60,8 @@ const routes: Routes = [
     RegisterComponent,
     PasswordEqualDirective,
     ZipNumberDirective,
-    ProductAddComponent
+    ProductAddComponent,
+    SizesFiedDirective
   ],
   imports: [
     BrowserModule,
