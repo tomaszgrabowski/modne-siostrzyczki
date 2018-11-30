@@ -46,11 +46,17 @@ export class Server {
             (req: express.Request, res: express.Response) => {
               const userx = req.body;
               //check user
-              db.collection('users').findOne(userx).then(_user=>res.status(200).json( _user ));
-
-              jwt.sign(userx, this.salt, (err, token) => {
-                res.status(200).json({ token });
-              });
+              db.collection("users")
+                .findOne(userx)
+                .then(_user => {
+                  if (_user) {
+                    jwt.sign(userx, this.salt, (err, token) => {
+                      res.status(200).json(token);
+                    });
+                  } else {
+                    res.sendStatus(403);
+                  }
+                });
             }
           );
         });
