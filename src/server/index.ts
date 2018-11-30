@@ -16,6 +16,8 @@ export class Server{
   }
 
   run(): void{
+    this.app.use(express.json());
+    this.app.use(express.urlencoded());
     this.app.listen(this.port, ()=>{
       console.log(`app is running on port ${this.port}`);
 
@@ -32,11 +34,8 @@ export class Server{
       });
 
       this.app.post("/login",(req: express.Request, res: express.Response)=>{
-        const user = {
-          id: "a14feab5-a691-579b-91f1-5be75e0ceb16",
-          username: 'tomek',
-          email: 'tomaszgrabowski07@gmail.com'
-        }
+        const user = req.body;
+        console.log(user);
         jwt.sign(user, this.salt, (err, token)=>{
           res.status(200).json({token});
         });
