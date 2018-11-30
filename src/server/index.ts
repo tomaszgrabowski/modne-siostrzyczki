@@ -12,7 +12,7 @@ export class Server{
     this.port = process.env.PORT || 1334;
     this.app = express();
     this.router = express.Router();
-    this.salt = "a5027243-b177-513d-ab8e-0394a2042ff9";
+    this.salt = process.env.SALT || "a5027243-b177-513d-ab8e-0394a2042ff9";
   }
 
   run(): void{
