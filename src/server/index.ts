@@ -21,7 +21,7 @@ export class Server {
     this.app.use(express.json());
     this.app.use(express.urlencoded());
     this.app.use(cors());
-    
+
     MongoClient.connect(
       "mongodb://localhost:27017",
       (err, client) => {
@@ -45,10 +45,14 @@ export class Server {
           );
 
           //LOGIN
-          this.app.post(
+          this.app.get(
             "/login",
             (req: express.Request, res: express.Response) => {
-              const userx = req.body;
+              const userx = {
+                email: req.param("email"),
+                password: req.param("password")
+              }
+              console.log(userx);
               //check user
               db.collection("users")
                 .findOne(userx)
