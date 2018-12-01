@@ -49,8 +49,8 @@ export class Server {
             "/login",
             (req: express.Request, res: express.Response) => {
               const userx = {
-                email: req.param("email"),
-                password: req.param("password")
+                email: req.query["email"],
+                password: req.query["password"]
               }
               //check user
               db.collection("users")
