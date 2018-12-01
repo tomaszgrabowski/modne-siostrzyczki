@@ -1,9 +1,9 @@
 import { Effect, Actions } from "@ngrx/effects";
-import { Observable } from "rxjs";
+import { Observable, of } from "rxjs";
 import { Action } from "@ngrx/store";
 import { Injectable } from "@angular/core";
 import * as fromActions from "src/store/actions";
-import { switchMap, map, mapTo } from "rxjs/operators";
+import { switchMap, map, mapTo, catchError } from "rxjs/operators";
 import { HttpService } from "src/app/services/httpService";
 import { User } from "src/models";
 
@@ -24,8 +24,8 @@ export class UserEffects {
             }&password=${_action.payload.password}`
           )
           .pipe(
+            catchError(x=> of(null)),
             map((user: User) => {
-              console.log(user);
               if (user) {
                 return new fromActions.LoginUserSuccess(user);
               }

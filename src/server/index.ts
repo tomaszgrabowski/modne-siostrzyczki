@@ -61,7 +61,7 @@ export class Server {
                       res.status(200).json({..._user, token });
                     });
                   } else {
-                    res.sendStatus(403);
+                    res.sendStatus(401);
                   }
                 });
             }
