@@ -52,14 +52,13 @@ export class Server {
                 email: req.param("email"),
                 password: req.param("password")
               }
-              console.log(userx);
               //check user
               db.collection("users")
                 .findOne(userx)
                 .then(_user => {
                   if (_user) {
                     jwt.sign(userx, this.salt, (err, token) => {
-                      res.status(200).json(token);
+                      res.status(200).json({..._user, token });
                     });
                   } else {
                     res.sendStatus(403);

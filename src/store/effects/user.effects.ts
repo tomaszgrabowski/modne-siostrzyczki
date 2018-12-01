@@ -19,15 +19,15 @@ export class UserEffects {
         const _action = <fromActions.LoginUser>action;
         return this.httpService
           .get(
-            `${HttpService.usersRoute}?email=${
+            `${HttpService.loginRoute}?email=${
               _action.payload.email
             }&password=${_action.payload.password}`
           )
           .pipe(
-            map((users: User[]) => {
-              console.log(users);
-              if (users.length > 0) {
-                return new fromActions.LoginUserSuccess(users[0]);
+            map((user: User) => {
+              console.log(user);
+              if (user) {
+                return new fromActions.LoginUserSuccess(user);
               }
               return new fromActions.LoginUserFail();
             })

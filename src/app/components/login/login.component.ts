@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit {
 
   onSubmit(login: string, password: string): void {
     if (this.validateLoginTries()) {
-      console.log(login, password);
       const user: User = {
         email: login,
         password: password
