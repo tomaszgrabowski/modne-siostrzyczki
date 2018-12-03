@@ -20,6 +20,6 @@ export class LoggedinGuardService implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    return this.store.select(isLoggedIn);//
+    return this.store.select(isLoggedIn);
   }
 }

@@ -4,24 +4,28 @@ import { MongoClient } from "mongodb";
 import * as cors from "cors";
 import { HttpService } from "../app/services/httpService";
 import { Collections } from "./collections";
+import * as multer from "multer";
+import { multerConfig } from "./multer-config";
 
 export class Server {
   private port: string | number;
   private app: express.Application;
-  private router: express.Router;
   private salt: string;
+  private upload: express.RequestHandler;
+  private allowedMimeTypes: string[];
 
   constructor() {
     this.port = process.env.PORT || 1334;
     this.app = express();
-    this.router = express.Router();
     this.salt = process.env.SALT || "a5027243-b177-513d-ab8e-0394a2042ff9";
+    this.upload = multer(multerConfig).any();
   }
 
   run(): void {
     this.app.use(express.json());
     this.app.use(express.urlencoded());
     this.app.use(cors());
+    this.app.use(this.upload);
 
     MongoClient.connect(
       "mongodb://localhost:27017",
@@ -111,6 +115,17 @@ export class Server {
                     });
                 }
               });
+            }
+          );
+
+          //UPLOAD
+          this.app.post(
+            HttpService.uploadRoute,
+            this.verifyToken,
+            (req: express.Request, res: express.Response) => {
+              console.log("upload");
+              console.log(req.files);
+              res.sendStatus(204).end();
             }
           );
         });

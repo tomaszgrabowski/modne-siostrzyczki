@@ -12,6 +12,7 @@ export class HttpService {
   static productsRoute: string = "/products";
   static ordersRoute: string = "/orders";
   static loginRoute: string = "/login";
+  static uploadRoute: string = "/upload";
 
   private baseUrl: string;
 
