@@ -3,7 +3,7 @@ import { Observable } from "rxjs";
 import { Action } from "@ngrx/store";
 import { Injectable } from "@angular/core";
 import * as fromActions from "src/store/actions";
-import { switchMap, map } from "rxjs/operators";
+import { switchMap, map, mapTo } from "rxjs/operators";
 import { HttpService } from "src/app/services/httpService";
 import { Product } from "src/models";
 
@@ -31,12 +31,10 @@ export class ProductsEffects {
       switchMap(action => {
         const _action = <fromActions.AddProduct>action;
         return this.productsService
-          .post(HttpService.productsRoute, _action.payload)
-          .pipe(
-            map((product: Product) => {
-              return new fromActions.AddProductSuccess(product);
-            })
-          );
+          .post(HttpService.productsRoute, _action.payload, {
+            responseType: "text"
+          })
+          .pipe(mapTo(new fromActions.AddProductSuccess(_action.payload)));
       })
     );
 }

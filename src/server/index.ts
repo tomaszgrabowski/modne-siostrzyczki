@@ -1,8 +1,9 @@
 import * as express from "express";
-import * as bodyParser from "body-parser";
 import * as jwt from "jsonwebtoken";
 import { MongoClient } from "mongodb";
-import * as cors from 'cors';
+import * as cors from "cors";
+import { HttpService } from "../app/services/httpService";
+import { Collections } from "./collections";
 
 export class Server {
   private port: string | number;
@@ -30,6 +31,7 @@ export class Server {
         this.app.listen(this.port, () => {
           console.log(`app is running on port ${this.port}`);
 
+          //HELLO
           this.app.get(
             "/hello",
             this.verifyToken,
@@ -46,19 +48,19 @@ export class Server {
 
           //LOGIN
           this.app.get(
-            "/login",
+            HttpService.loginRoute,
             (req: express.Request, res: express.Response) => {
               const userx = {
                 email: req.query["email"],
                 password: req.query["password"]
-              }
+              };
               //check user
-              db.collection("users")
+              db.collection(Collections.Users)
                 .findOne(userx)
                 .then(_user => {
                   if (_user) {
                     jwt.sign(userx, this.salt, (err, token) => {
-                      res.status(200).json({..._user, token });
+                      res.status(200).json({ ..._user, token });
                     });
                   } else {
                     res.sendStatus(401);
@@ -67,11 +69,26 @@ export class Server {
             }
           );
 
+          //REGISTER
+          this.app.post(
+            HttpService.usersRoute,
+            (req: express.Request, res: express.Response) => {
+              //validate user?
+              db.collection(Collections.Users)
+                .insertOne(req.body)
+                .then(user => {
+                  jwt.sign(user, this.salt, (err, token) => {
+                    res.status(200).json({ ...user, token });
+                  });
+                });
+            }
+          );
+
           //PRODUCTS
           this.app.get(
-            "/products",
+            HttpService.productsRoute,
             (req: express.Request, res: express.Response) => {
-              db.collection("products")
+              db.collection(Collections.Products)
                 .find({})
                 .toArray()
                 .then(products => {
@@ -80,16 +97,18 @@ export class Server {
             }
           );
           this.app.post(
-            "/products",
+            HttpService.productsRoute,
             this.verifyToken,
             (req: express.Request, res: express.Response) => {
               jwt.verify(req["token"], this.salt, (err, authData) => {
                 if (err) {
                   res.sendStatus(403);
                 } else {
-                  db.collection("products").insert(req.body).then(()=>{
-                    res.sendStatus(201);
-                  });
+                  db.collection(Collections.Products)
+                    .insert(req.body)
+                    .then(() => {
+                      res.sendStatus(201);
+                    });
                 }
               });
             }

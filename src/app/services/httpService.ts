@@ -8,10 +8,10 @@ import { ConstantsService } from "./constants.service";
 })
 export class HttpService {
 
-  static usersRoute: string = "users";
-  static productsRoute: string = "products";
-  static ordersRoute: string = "orders";
-  static loginRoute: string = "login";
+  static usersRoute: string = "/users";
+  static productsRoute: string = "/products";
+  static ordersRoute: string = "/orders";
+  static loginRoute: string = "/login";
 
   private baseUrl: string;
 
@@ -23,7 +23,7 @@ export class HttpService {
     return this.http.get(this.baseUrl + url);
   }
 
-  post(url: string, obj: any): Observable<Object> {
-    return this.http.post(this.baseUrl + url, obj);
+  post(url: string, obj: any, headers?: any): Observable<Object> {
+    return this.http.post(this.baseUrl + url, obj, headers);
   }
 }

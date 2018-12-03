@@ -60,4 +60,14 @@
       Wyloguj
     </a>
   </li>
+  <li class="nav-item" *ngIf="isLoggedIn">
+    <a
+      class="nav-link"
+      [routerLink]="['/admin/add-product']"
+      [routerLinkActive]="activeRouteBorderStyle"
+    >
+      <fa-icon [icon]="faMoneyCheckAlt"></fa-icon>
+      Admin
+    </a>
+  </li>
 </ul>

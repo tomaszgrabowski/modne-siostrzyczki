@@ -22,7 +22,7 @@ import { ToastrModule } from "ngx-toastr";
 
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { ProductsEffects } from "src/store/effects/products.effects";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { OrderEffects } from "src/store/effects/order.effects";
 import { LoginComponent } from "./components/login/login.component";
 import { UserEffects } from "src/store/effects/user.effects";
@@ -32,6 +32,7 @@ import { PasswordEqualDirective } from './directives/password-equal.directive';
 import { ZipNumberDirective } from './directives/zip-number.directive';
 import { ProductAddComponent } from './components/admin/product-add/product-add.component';
 import { SizesFiedDirective } from './directives/sizes-fied.directive';
+import { AuthInterceptorService } from "./services/auth-interceptor.service";
 
 const routes: Routes = [
   { path: "", component: ProductsListComponent, pathMatch: "full" },
@@ -84,7 +85,9 @@ const routes: Routes = [
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
