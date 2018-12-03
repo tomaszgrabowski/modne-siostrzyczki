@@ -67,3 +67,13 @@ export const isLoggedIn = createSelector(
     return false;
   }
 );
+
+export const isAdmin = createSelector(
+  getUser,
+  (state: User) => {
+    if (state.isAdmin) {
+      return true;
+    }
+    return false;
+  }
+);

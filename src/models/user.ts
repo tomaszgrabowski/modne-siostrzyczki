@@ -8,4 +8,5 @@ export interface User {
   phone?: string;
   token?: string;
   password: string;
+  isAdmin?: boolean;
 }

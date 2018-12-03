@@ -33,6 +33,7 @@ import { ZipNumberDirective } from './directives/zip-number.directive';
 import { ProductAddComponent } from './components/admin/product-add/product-add.component';
 import { SizesFiedDirective } from './directives/sizes-fied.directive';
 import { AuthInterceptorService } from "./services/auth-interceptor.service";
+import { LoggedinGuardService } from "./services/LoggedinGuardService";
 
 const routes: Routes = [
   { path: "", component: ProductsListComponent, pathMatch: "full" },
@@ -42,7 +43,7 @@ const routes: Routes = [
   { path: "checkout", component: OrderComponent },
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
-  { path: "admin/add-product", component: ProductAddComponent},
+  { path: "admin/add-product", component: ProductAddComponent, canActivate: [ LoggedinGuardService ] },
   { path: "**", component: ProductsListComponent }
 ];
 
