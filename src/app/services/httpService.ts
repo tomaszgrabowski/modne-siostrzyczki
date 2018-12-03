@@ -19,11 +19,11 @@ export class HttpService {
     this.baseUrl = this.constants.API_URL;
   }
 
-  get(url: string): Observable<Object> {
-    return this.http.get(this.baseUrl + url);
+  get(url: string, headers?: {}): Observable<Object> {
+    return this.http.get(this.baseUrl + url, headers);
   }
 
-  post(url: string, obj: any, headers?: any): Observable<Object> {
+  post(url: string, obj: any, headers?: {}): Observable<Object> {
     return this.http.post(this.baseUrl + url, obj, headers);
   }
 }
