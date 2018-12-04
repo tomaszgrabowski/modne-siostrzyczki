@@ -13,6 +13,7 @@ import { faFire } from "@fortawesome/free-solid-svg-icons";
 import { ToastrService } from "ngx-toastr";
 import { ConstantsService } from "src/app/services/constants.service";
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
+import { DomainResolverService } from "src/app/services/domain-resolver.service";
 
 @Component({
   selector: "app-product-details",
@@ -33,8 +34,7 @@ export class ProductDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private toastr: ToastrService,
     private router: Router,
-    private constants: ConstantsService,
-    private sanitizer: DomSanitizer
+    private domainResolver: DomainResolverService
   ) {}
 
   ngOnInit() {
@@ -77,7 +77,6 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   getImageUrl(image:string): SafeResourceUrl{
-    const url =  this.constants.DEV_MODE ? `http://localhost:1334/photos/${image}` : `/photos/${image}`;
-    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    return this.domainResolver.getResourceUrl(image);
   }
 }

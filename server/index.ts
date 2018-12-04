@@ -25,7 +25,7 @@ export class Server {
     this.app.use(express.urlencoded());
     this.app.use(cors());
     this.app.use(this.upload);
-    this.app.use("/photos", express.static("uploads"));
+    this.app.use("/resources", express.static("uploads"));
 
     const path = require("path");
     const workingDir = path.join(__dirname, "..","dist//modne-siostrzyczki")
