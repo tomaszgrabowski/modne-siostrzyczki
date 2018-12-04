@@ -80,7 +80,7 @@ export const getProductById = (id: string) => {
   return createSelector(
     getProducts,
     (state: Product[]) => {
-      return state.find(product => product.id === id);
+      return state.find(product => product._id === id);
     }
   );
 };
@@ -95,7 +95,7 @@ export const getProductAvailableSizes = (id: string) => {
     getProducts,
     (state: Product[]) => {
       return state
-        .find(product => product.id === id)
+        .find(product => product._id === id)
         .sizes.filter(size => size.reserved === false);
     }
   );

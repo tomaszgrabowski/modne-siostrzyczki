@@ -3,7 +3,7 @@ import { ProductSize } from "./product-size";
 import { Category } from "./category";
 
 export interface Product{
-  id: string;
+  _id: string,
   name: string;
   description: string;
   photos: ProductImage[];

@@ -19,7 +19,7 @@ export class ProductAddComponent implements OnInit {
 
   onSubmit(form) {
     const product: Product = {
-      id: uuid(),
+      _id: null,
       category: form.category,
       date: new Date().toISOString(),
       name: form.name,

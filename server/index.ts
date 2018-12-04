@@ -1,8 +1,8 @@
 import * as express from "express";
 import * as jwt from "jsonwebtoken";
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectID } from "mongodb";
 import * as cors from "cors";
-import { HttpService } from "../app/services/httpService";
+import { HttpService } from "../src/app/services/httpService";
 import { Collections } from "./collections";
 import * as multer from "multer";
 import { multerConfig } from "./multer-config";
@@ -12,7 +12,6 @@ export class Server {
   private app: express.Application;
   private salt: string;
   private upload: express.RequestHandler;
-  private allowedMimeTypes: string[];
 
   constructor() {
     this.port = process.env.PORT || 1334;
@@ -26,6 +25,12 @@ export class Server {
     this.app.use(express.urlencoded());
     this.app.use(cors());
     this.app.use(this.upload);
+    this.app.use("/photos", express.static("uploads"));
+
+    const path = require("path");
+    const workingDir = path.join(__dirname, "..","dist//modne-siostrzyczki")
+    this.app.use(express.static(workingDir));
+
 
     MongoClient.connect(
       "mongodb://localhost:27017",
@@ -37,16 +42,9 @@ export class Server {
 
           //HELLO
           this.app.get(
-            "/hello",
-            this.verifyToken,
+            "/app",
             (req: express.Request, res: express.Response) => {
-              jwt.verify(req["token"], this.salt, (err, authData) => {
-                if (err) {
-                  res.sendStatus(403);
-                } else {
-                  res.status(200).json({ message: `hello` });
-                }
-              });
+              res.sendFile(workingDir + "/index.html");
             }
           );
 
@@ -123,9 +121,22 @@ export class Server {
             HttpService.uploadRoute,
             this.verifyToken,
             (req: express.Request, res: express.Response) => {
-              console.log("upload");
-              console.log(req.files);
-              res.sendStatus(204).end();
+              db.collection(Collections.Products)
+                .updateOne(
+                  { _id: new ObjectID(req.body.id) },
+                  {
+                    $push: {
+                      photos: {
+                        url: req.files[0].filename,
+                        thumbnail: false
+                      }
+                    }
+                  }
+                )
+                .then(() => {
+                  console.log("updated");
+                  res.sendStatus(204);
+                });
             }
           );
         });

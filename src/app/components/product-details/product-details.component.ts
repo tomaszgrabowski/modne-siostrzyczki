@@ -11,6 +11,8 @@ import {
 import { ActivatedRoute, Router } from "@angular/router";
 import { faFire } from "@fortawesome/free-solid-svg-icons";
 import { ToastrService } from "ngx-toastr";
+import { ConstantsService } from "src/app/services/constants.service";
+import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
 
 @Component({
   selector: "app-product-details",
@@ -30,7 +32,9 @@ export class ProductDetailsComponent implements OnInit {
     private store: Store<fromReducers.AppState>,
     private route: ActivatedRoute,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private constants: ConstantsService,
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit() {
@@ -42,23 +46,23 @@ export class ProductDetailsComponent implements OnInit {
         this.router.navigate(["/"]);
       }
       this.product = product;
-      this.choosenImage = product.photos.find(image => image.thumbnail).url;
+      this.choosenImage = "/photos/" + product.photos.find(image => image.thumbnail).url;
     });
     this.store
-      .select(getProductAvailableSizes(this.product.id))
+      .select(getProductAvailableSizes(this.product._id))
       .subscribe(sizes => (this.lastItem = sizes.length < 2));
   }
 
-  private chooseImage(image: ProductImage): void {
+  chooseImage(image: ProductImage): void {
     this.choosenImage = image.url;
   }
 
-  private chooseSize(size: ProductSize): void {
+  chooseSize(size: ProductSize): void {
     this.choosenSize = size.size;
     this.orderDisabled = this.choosenSize === "Rozmiar" ? true : false;
   }
 
-  private addToCart(product: Product): void {
+  addToCart(product: Product): void {
     this.store.dispatch(
       new fromActions.AddProductToOrder({
         ...product,
@@ -68,7 +72,12 @@ export class ProductDetailsComponent implements OnInit {
     this.toastr.success("Produkt dodano do koszyka...");
   }
 
-  private backToProductsList(): void {
+  backToProductsList(): void {
     this.router.navigate(["/"]);
+  }
+
+  getImageUrl(image:string): SafeResourceUrl{
+    const url =  this.constants.DEV_MODE ? `http://localhost:1334/photos/${image}` : `/photos/${image}`;
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 }

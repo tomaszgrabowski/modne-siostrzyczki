@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "db": "json-server --watch db.json --port 3004",
-    "nodemon": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/server/index.ts",
+    "nodemon": "nodemon --exec ./node_modules/.bin/ts-node -- ./server/index.ts",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",

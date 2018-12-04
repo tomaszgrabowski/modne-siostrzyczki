@@ -20,7 +20,7 @@ export class ProductComponent implements OnInit {
   constructor(private store: Store<fromReducers.AppState>) {}
 
   ngOnInit() {
-    this.store.select(getProductAvailableSizes(this.product.id)).subscribe(sizes=> this.availableSizes = sizes);
+    this.store.select(getProductAvailableSizes(this.product._id)).subscribe(sizes=> this.availableSizes = sizes);
     this.lastItem = this.availableSizes.length < 2;
   }
 }
