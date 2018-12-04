@@ -14,6 +14,8 @@ import { Observable } from "rxjs";
 import { faTrashAlt, faMoneyCheckAlt } from "@fortawesome/free-solid-svg-icons";
 import * as fromActions from "src/store/actions";
 import { Router } from "@angular/router";
+import { SafeResourceUrl } from "@angular/platform-browser";
+import { DomainResolverService } from "src/app/services/domain-resolver.service";
 
 @Component({
   selector: "app-cart",
@@ -27,26 +29,37 @@ export class CartComponent implements OnInit {
   private faMoneyCheckAlt = faMoneyCheckAlt;
   private isLoggedIn: Observable<boolean>;
 
-  constructor(private store: Store<AppState>, private toastr: ToastrService, private router: Router) {}
+  constructor(
+    private store: Store<AppState>,
+    private toastr: ToastrService,
+    private router: Router,
+    private domainResolver: DomainResolverService
+  ) {}
 
   ngOnInit() {
     this.products = this.store.select(getOrderProducts);
     this.productsCount = this.store.select(getOrderProductsCount);
-    this.isLoggedIn =  this.store.select(isLoggedIn);
+    this.isLoggedIn = this.store.select(isLoggedIn);
   }
 
-  private remove(product: Product): void {
+  remove(product: Product): void {
     this.store.dispatch(new fromActions.RemoveProductFromOrder(product));
   }
 
-  private placeOrder(): void {
-    this.store.select(getOrder).subscribe(order => {
-      this.store.select(getUser).subscribe(user => {
-        order.user = user;
-        this.store.dispatch(new fromActions.PlaceOrder(order));
-        this.toastr.success("Złożono zamówienie...");
-        this.router.navigate(["/"]);//strona podziękowań?
-      }).unsubscribe();
-    }).unsubscribe();
+  placeOrder(): void {
+    this.store
+      .select(getOrder)
+      .subscribe(order => {
+        this.store
+          .select(getUser)
+          .subscribe(user => {
+            order.user = user;
+            this.store.dispatch(new fromActions.PlaceOrder(order));
+            this.toastr.success("Złożono zamówienie...");
+            this.router.navigate(["/"]); //strona podziękowań?
+          })
+          .unsubscribe();
+      })
+      .unsubscribe();
   }
 }

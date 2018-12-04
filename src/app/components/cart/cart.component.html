@@ -12,7 +12,7 @@
       <tbody>
         <tr *ngFor="let product of (products | async)">
           <th scope="row">
-            <img [src]="product.photos[0].url" class="img-thumbnail" />
+            <img app-product-thumbnail [items]="product.photos" class="img-thumbnail" />
           </th>
           <td>{{ product.name }}</td>
           <td>{{ product.choosenSize }}</td>

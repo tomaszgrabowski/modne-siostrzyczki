@@ -1,6 +1,5 @@
 import { Directive, Input, OnInit, HostBinding } from "@angular/core";
 import { ProductImage } from "src/models";
-import { ConstantsService } from "../services/constants.service";
 import { DomainResolverService } from "../services/domain-resolver.service";
 
 @Directive({
