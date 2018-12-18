@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { Product } from "src/models";
-import { v4 as uuid } from "uuid";
 import * as fromReducers from "src/store/reducers";
 import * as fromActions from "src/store/actions";
 import { Store } from "@ngrx/store";
+import { HttpService } from "src/app/services/httpService";
 
 @Component({
   selector: "app-product-add",
@@ -12,12 +12,22 @@ import { Store } from "@ngrx/store";
 })
 export class ProductAddComponent implements OnInit {
   private placeholder: string = "https://via.placeholder.com/150";
+  private img1: string;
+  private img2: string;
+  private img3: string;
 
-  constructor(private store: Store<fromReducers.AppState>) {}
+  constructor(private store: Store<fromReducers.AppState>, private http: HttpService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
+
+  onImg1Change(event) {
+    const formData = new FormData();
+    formData.append("upload", event.target.files[0], event.target.files[0].name);
+    this.http.post(HttpService.uploadRoute, formData).subscribe(res => console.log(res));
+  }
 
   onSubmit(form) {
+    console.log(form);
     const product: Product = {
       _id: null,
       category: form.category,
@@ -28,7 +38,15 @@ export class ProductAddComponent implements OnInit {
       photos: [
         {
           thumbnail: true,
-          url: this.placeholder
+          url: form.img1
+        },
+        {
+          thumbnail: false,
+          url: form.img2
+        },
+        {
+          thumbnail: false,
+          url: form.img3
         }
       ],
       price: form.price,

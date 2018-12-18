@@ -28,7 +28,7 @@ export class Server {
     this.app.use("/resources", express.static("uploads"));
 
     const path = require("path");
-    const workingDir = path.join(__dirname, "..","dist//modne-siostrzyczki")
+    const workingDir = path.join(__dirname, "..", "dist//modne-siostrzyczki")
     this.app.use(express.static(workingDir));
 
 
@@ -121,22 +121,7 @@ export class Server {
             HttpService.uploadRoute,
             this.verifyToken,
             (req: express.Request, res: express.Response) => {
-              db.collection(Collections.Products)
-                .updateOne(
-                  { _id: new ObjectID(req.body.id) },
-                  {
-                    $push: {
-                      photos: {
-                        url: req.files[0].filename,
-                        thumbnail: false
-                      }
-                    }
-                  }
-                )
-                .then(() => {
-                  console.log("updated");
-                  res.sendStatus(204);
-                });
+              res.send(204).json({"filename": req.files[0].filename})
             }
           );
         });
