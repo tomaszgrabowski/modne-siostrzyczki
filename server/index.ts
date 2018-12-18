@@ -121,7 +121,8 @@ export class Server {
             HttpService.uploadRoute,
             this.verifyToken,
             (req: express.Request, res: express.Response) => {
-              res.send(204).json({"filename": req.files[0].filename})
+              console.log("filename", req.files[0].filename);
+              res.status(200).json(req.files[0].filename)
             }
           );
         });

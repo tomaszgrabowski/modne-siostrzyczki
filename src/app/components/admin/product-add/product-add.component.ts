@@ -23,7 +23,7 @@ export class ProductAddComponent implements OnInit {
   onImg1Change(event) {
     const formData = new FormData();
     formData.append("upload", event.target.files[0], event.target.files[0].name);
-    this.http.post(HttpService.uploadRoute, formData).subscribe(res => console.log(res));
+    this.http.post(HttpService.uploadRoute, formData).subscribe(res => this.img1 = res+"");
   }
 
   onSubmit(form) {
@@ -38,7 +38,7 @@ export class ProductAddComponent implements OnInit {
       photos: [
         {
           thumbnail: true,
-          url: form.img1
+          url: this.img1
         },
         {
           thumbnail: false,
