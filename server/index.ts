@@ -28,9 +28,8 @@ export class Server {
     this.app.use("/resources", express.static("uploads"));
 
     const path = require("path");
-    const workingDir = path.join(__dirname, "..","dist//modne-siostrzyczki")
+    const workingDir = path.join(__dirname, "..", "dist//modne-siostrzyczki")
     this.app.use(express.static(workingDir));
-
 
     MongoClient.connect(
       "mongodb://localhost:27017",
@@ -117,26 +116,13 @@ export class Server {
           );
 
           //UPLOAD
+          //TODO: upload in folder with date?
           this.app.post(
             HttpService.uploadRoute,
             this.verifyToken,
             (req: express.Request, res: express.Response) => {
-              db.collection(Collections.Products)
-                .updateOne(
-                  { _id: new ObjectID(req.body.id) },
-                  {
-                    $push: {
-                      photos: {
-                        url: req.files[0].filename,
-                        thumbnail: false
-                      }
-                    }
-                  }
-                )
-                .then(() => {
-                  console.log("updated");
-                  res.sendStatus(204);
-                });
+              //TODO: handle upload error here (e.g. file not accepted)
+              res.status(200).json(req.files[0].filename)
             }
           );
         });
