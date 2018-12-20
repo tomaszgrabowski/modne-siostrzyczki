@@ -31,7 +31,6 @@ export class Server {
     const workingDir = path.join(__dirname, "..", "dist//modne-siostrzyczki")
     this.app.use(express.static(workingDir));
 
-
     MongoClient.connect(
       "mongodb://localhost:27017",
       (err, client) => {
@@ -117,11 +116,12 @@ export class Server {
           );
 
           //UPLOAD
+          //TODO: upload in folder with date?
           this.app.post(
             HttpService.uploadRoute,
             this.verifyToken,
             (req: express.Request, res: express.Response) => {
-              console.log("filename", req.files[0].filename);
+              //TODO: handle upload error here (e.g. file not accepted)
               res.status(200).json(req.files[0].filename)
             }
           );

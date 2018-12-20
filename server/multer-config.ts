@@ -2,7 +2,7 @@ import * as express from "express";
 import multer = require("multer");
 import { v4 as uuid } from "uuid";
 
-const allowedMimeTypes = ["jpeg", "jpg", "png"];
+const allowedMimeTypes = ["jpeg", "jpg", "png", "JPG", "JPEG", "PNG"];
 
 export const multerConfig = {
   limits: {
