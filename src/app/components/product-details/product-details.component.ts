@@ -46,7 +46,7 @@ export class ProductDetailsComponent implements OnInit {
         this.router.navigate(["/"]);
       }
       this.product = product;
-      this.choosenImage = "/photos/" + product.photos.find(image => image.thumbnail).url;
+      this.choosenImage = product.photos.find(image => image.thumbnail).url;
     });
     this.store
       .select(getProductAvailableSizes(this.product._id))

@@ -40,3 +40,11 @@ Thumbs.db
 
 # dev db
 db.json
+
+# images
+*.jpg
+*.jpg
+*.jpeg
+*.JPEG
+*.png
+*.PNG
