@@ -45,6 +45,7 @@ const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
   { path: "admin/add-product", component: ProductAddComponent, canActivate: [ LoggedinGuardService ] },
+  { path: "admin/list", component: ProductsAdminListComponent, canActivate: [ LoggedinGuardService ] },
   { path: "**", component: ProductsListComponent }
 ];
 
