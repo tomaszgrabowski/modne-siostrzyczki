@@ -4,7 +4,6 @@ import * as fromReducers from "src/store/reducers";
 import * as fromActions from "src/store/actions";
 import { Store } from "@ngrx/store";
 import { HttpService } from "src/app/services/httpService";
-import { faImages } from "@fortawesome/free-solid-svg-icons";
 import { ToastrService } from "ngx-toastr";
 
 @Component({
@@ -19,7 +18,7 @@ export class ProductAddComponent implements OnInit {
   constructor(
     private store: Store<fromReducers.AppState>,
     private http: HttpService,
-    private toastr: ToastrService,
+    private toastr: ToastrService
     ) { }
 
   ngOnInit() { }

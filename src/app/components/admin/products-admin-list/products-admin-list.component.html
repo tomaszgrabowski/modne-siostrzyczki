@@ -1,3 +1,12 @@
-<p>
-  products-admin-list works!
-</p>
+<div class="list-group">
+  <a *ngFor="let product of products" class="list-group-item list-group-item-action flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">{{product.name}}</h5>
+      <small>{{product.date | date: 'short'}}</small>
+    </div>
+    <p class="mb-1">
+      <img [src]="getThumbnail(product)" class="img img-fluid" alt="Responsive image" />
+      {{product.description}}
+    </p>
+  </a>
+</div>
