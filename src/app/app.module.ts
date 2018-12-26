@@ -34,6 +34,7 @@ import { ProductAddComponent } from './components/admin/product-add/product-add.
 import { SizesFiedDirective } from './directives/sizes-fied.directive';
 import { AuthInterceptorService } from "./services/auth-interceptor.service";
 import { LoggedinGuardService } from "./services/loggedin-guard.service";
+import { ProductsAdminListComponent } from './components/admin/products-admin-list/products-admin-list.component';
 
 const routes: Routes = [
   { path: "", component: ProductsListComponent, pathMatch: "full" },
@@ -63,7 +64,8 @@ const routes: Routes = [
     PasswordEqualDirective,
     ZipNumberDirective,
     ProductAddComponent,
-    SizesFiedDirective
+    SizesFiedDirective,
+    ProductsAdminListComponent
   ],
   imports: [
     BrowserModule,
