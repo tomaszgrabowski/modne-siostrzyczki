@@ -60,6 +60,7 @@ export function productsReducer(
       };
 
     case fromActions.REMOVE_PRODUCT_SUCCESS:
+    console.log(state.data.filter(product => product!== (<fromActions.RemoveProduct>action).payload));
       return {
         data: state.data.filter(product => product!== (<fromActions.RemoveProduct>action).payload),
         loading: false,

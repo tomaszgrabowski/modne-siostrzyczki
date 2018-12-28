@@ -5,6 +5,7 @@ import * as fromActions from "src/store/actions";
 import { Store } from "@ngrx/store";
 import { HttpService } from "src/app/services/httpService";
 import { ToastrService } from "ngx-toastr";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-product-add",
@@ -18,7 +19,8 @@ export class ProductAddComponent implements OnInit {
   constructor(
     private store: Store<fromReducers.AppState>,
     private http: HttpService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router
     ) { }
 
   ngOnInit() { }
@@ -28,7 +30,6 @@ export class ProductAddComponent implements OnInit {
     formData.append("upload", event.target.files[0], event.target.files[0].name);
     this.http.post(HttpService.uploadRoute, formData).subscribe(res => {
       this.images = [...this.images.filter(image => image.id !== event.target.name), { id: event.target.name, url: res }];
-      console.log("arr changed", this.images);
     }, err => {
       this.toastr.error("Wystąpił nieoczekiwany błąd...");
     });
@@ -53,6 +54,6 @@ export class ProductAddComponent implements OnInit {
     };
     product.photos[0].thumbnail = true;
     this.store.dispatch(new fromActions.AddProduct(product));
-    // move to admin product list
+    this.router.navigate(['admin','list']);
   }
 }

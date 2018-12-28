@@ -1,25 +1,26 @@
-<a
-      class="nav-link"
-      [routerLink]="['/admin','add-product']"
-    >Dodaj produkt</a>
-<div class="list-group">
-  <a *ngFor="let product of products" class="list-group-item list-group-item-action flex-column align-items-start">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">{{product.name}}</h5>
-      <small>{{product.date | date: 'dd-MM-yyyy H:mm'}}</small>
+<div class="row">
+  <div class="col-md-12">
+    <a class="nav-link" [routerLink]="['/admin','add-product']">Dodaj produkt</a>
+    <div class="list-group">
+      <a *ngFor="let product of products" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{product.name}}</h5>
+          <small>{{product.date | date: 'dd-MM-yyyy H:mm'}}</small>
+        </div>
+        <div class="mb-1 row">
+          <div class="col-md-2">
+            <img [src]="getThumbnail(product)" class="img img-fluid" alt="Responsive image" />
+          </div>
+          <div class="col-md-10">
+            {{product.description}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <button class="btn btn-danger float-right" (click)="onDelete(product)">Kasuj</button>
+          </div>
+        </div>
+      </a>
     </div>
-    <div class="mb-1 row">
-      <div class="col-md-2">
-        <img [src]="getThumbnail(product)" class="img img-fluid" alt="Responsive image" />
-      </div>
-      <div class="col-md-10">
-        {{product.description}}
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <button class="btn btn-danger float-right" (click)="onDelete(product)">Kasuj</button>
-      </div>
-    </div>
-  </a>
+  </div>
 </div>
