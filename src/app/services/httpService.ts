@@ -27,4 +27,8 @@ export class HttpService {
   post(url: string, obj: any, headers?: {}): Observable<Object> {
     return this.http.post(this.baseUrl + url, obj, headers);
   }
+
+  delete(url: string, obj: any, headers?: {}): Observable<Object> {
+    return this.http.delete(this.baseUrl + url + '/' + obj._id, headers);
+  }
 }

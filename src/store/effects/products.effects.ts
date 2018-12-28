@@ -9,7 +9,7 @@ import { Product } from "src/models";
 
 @Injectable()
 export class ProductsEffects {
-  constructor(private actions: Actions, private productsService: HttpService) {}
+  constructor(private actions: Actions, private productsService: HttpService) { }
 
   @Effect()
   loadProducts: Observable<Action> = this.actions
@@ -35,6 +35,20 @@ export class ProductsEffects {
             responseType: "text"
           })
           .pipe(mapTo(new fromActions.AddProductSuccess(_action.payload)));
+      })
+    );
+
+  @Effect()
+  removeProducts: Observable<Action> = this.actions
+    .ofType(fromActions.REMOVE_PRODUCT)
+    .pipe(
+      switchMap(action => {
+        const _action = <fromActions.RemoveProduct>action;
+        return this.productsService
+          .delete(HttpService.productsRoute, _action.payload, {
+            responseType: "text"
+          })
+          .pipe(mapTo(new fromActions.RemoveProductSuccess(_action.payload)));
       })
     );
 }

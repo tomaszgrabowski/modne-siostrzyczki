@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as fromReducers from "src/store/reducers";
+import * as fromActions from 'src/store/actions';
 import { ToastrService } from "ngx-toastr";
 import { Product } from 'src/models';
 import { SafeResourceUrl } from '@angular/platform-browser';
@@ -23,6 +24,12 @@ export class ProductsAdminListComponent implements OnInit {
     this.store.select(fromReducers.getProducts).subscribe(products => {
       this.products = products;
     });
+
+  }
+
+  onDelete(product: Product){
+    this.store.dispatch(new fromActions.RemoveProduct(product));
+    this.toastr.success(`${product.name} usunięto z listy produktów.`);
 
   }
 

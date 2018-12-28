@@ -7,6 +7,9 @@ export const LOAD_PRODUCTS_FAIL = "[PRODUCTS] Load Products Fail";
 export const ADD_PRODUCT = "[PRODUCTS] Add Product";
 export const ADD_PRODUCT_SUCCESS = "[PRODUCTS] Add Product Sucess";
 export const ADD_PRODUCT_FAIL = "[PRODUCTS] Add Product Fail";
+export const REMOVE_PRODUCT = "[PRODUCTS] Remove Product";
+export const REMOVE_PRODUCT_SUCCESS = "[PRODUCTS] Remove Product Success";
+export const REMOVE_PRODUCT_FAIL = "[PRODUCTS] Remove Product Fail";
 
 
 export class LoadProducts implements Action {
@@ -37,6 +40,20 @@ export class AddProductFail implements Action {
   public readonly type: string = ADD_PRODUCT_FAIL;
 }
 
+export class RemoveProduct implements Action {
+  public readonly type: string = REMOVE_PRODUCT;
+  constructor(public payload: Product) {}
+}
+
+export class RemoveProductSuccess implements Action {
+  public readonly type: string = REMOVE_PRODUCT_SUCCESS;
+  constructor(public payload: Product) {}
+}
+
+export class RemoveProductFail implements Action {
+  public readonly type: string = REMOVE_PRODUCT_FAIL;
+}
+
 //action types
 
 export type ProductsAction =
@@ -45,4 +62,7 @@ export type ProductsAction =
   | LoadProductsFail
   | AddProduct
   | AddProductSuccess
-  | AddProductFail;
+  | AddProductFail
+  | RemoveProduct
+  | RemoveProductSuccess
+  | RemoveProductFail;

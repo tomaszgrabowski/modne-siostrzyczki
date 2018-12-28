@@ -51,6 +51,20 @@ export function productsReducer(
         loading: false,
         loaded: true
       };
+
+      case fromActions.REMOVE_PRODUCT:
+      return {
+        ...state,
+        loading: false,
+        loaded: true
+      };
+
+    case fromActions.REMOVE_PRODUCT_SUCCESS:
+      return {
+        data: state.data.filter(product => product!== (<fromActions.RemoveProduct>action).payload),
+        loading: false,
+        loaded: true
+      };
   }
 
   return state;

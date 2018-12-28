@@ -114,6 +114,26 @@ export class Server {
               });
             }
           );
+          this.app.delete(
+            HttpService.productsRoute + '/:id',
+            this.verifyToken,
+            (req: express.Request, res: express.Response) => {
+              jwt.verify(req["token"], this.salt, (err, authData) => {
+                if (err) {
+                  res.sendStatus(403);
+                } else {
+                  // db.collection(Collections.Products)
+                  //   .insert(req.body)
+                  //   .then(() => {
+                  //     res.sendStatus(201);
+                  //   });
+                  console.log(req.params.id);
+                  db.collection(Collections.Products)
+                    .deleteOne({_id: req.params.id});
+                }
+              });
+            }
+          );
 
           //UPLOAD
           //TODO: upload in folder with date?
