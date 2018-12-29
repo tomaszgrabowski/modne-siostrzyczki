@@ -1,5 +1,4 @@
 .card {
-  object-fit: cover;
   height: 24rem;
   margin: 1rem;
   color: #333;
@@ -23,6 +22,7 @@
 img {
   height: 16rem;
   width: auto;
+  object-fit: cover;
 }
 a {
   color: black;
