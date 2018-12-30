@@ -30,7 +30,11 @@ export class ProductsAdminListComponent implements OnInit {
   onDelete(product: Product){
     this.store.dispatch(new fromActions.RemoveProduct(product));
     this.toastr.success(`${product.name} usunięto z listy produktów.`);
+  }
 
+  onTogglePromo(product: Product){
+    product.promo = !product.promo;
+    this.store.dispatch(new fromActions.UpdateProduct(product));
   }
 
   getThumbnail(product:Product): SafeResourceUrl{

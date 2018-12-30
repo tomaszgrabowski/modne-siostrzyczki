@@ -106,7 +106,7 @@ export class Server {
                   res.sendStatus(403);
                 } else {
                   db.collection(Collections.Products)
-                    .insert(req.body)
+                    .replaceOne({ _id: req.body._id }, req.body)
                     .then(() => {
                       res.sendStatus(201);
                     });
@@ -123,8 +123,8 @@ export class Server {
                   res.sendStatus(403);
                 } else {
                   db.collection(Collections.Products)
-                    .deleteOne({"_id": new ObjectId(req.params.id)});
-                    res.sendStatus(202);
+                    .deleteOne({ "_id": new ObjectId(req.params.id) });
+                  res.sendStatus(202);
                 }
               });
             }

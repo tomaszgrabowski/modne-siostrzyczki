@@ -4,7 +4,7 @@ import { Observable } from "rxjs";
 import * as fromReducers from "src/store/reducers";
 import * as fromActions from "src/store/actions";
 import {
-  getNewProducts,
+  getPromoProducts,
   getProducts
 } from "src/store/reducers/products.reducer";
 import { Product } from "src/models";
@@ -25,7 +25,7 @@ export class ProductsListComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(new fromActions.LoadProducts());
-    this.products = this.store.select(getNewProducts);
+    this.products = this.store.select(getPromoProducts);
     this.products.subscribe(products => this.amount = products.length);
   }
 }

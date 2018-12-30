@@ -4,12 +4,18 @@ import { Product } from "src/models";
 export const LOAD_PRODUCTS = "[PRODUCTS] Load Products";
 export const LOAD_PRODUCTS_SUCCESS = "[PRODUCTS] Load Products Success";
 export const LOAD_PRODUCTS_FAIL = "[PRODUCTS] Load Products Fail";
+
 export const ADD_PRODUCT = "[PRODUCTS] Add Product";
 export const ADD_PRODUCT_SUCCESS = "[PRODUCTS] Add Product Sucess";
 export const ADD_PRODUCT_FAIL = "[PRODUCTS] Add Product Fail";
+
 export const REMOVE_PRODUCT = "[PRODUCTS] Remove Product";
 export const REMOVE_PRODUCT_SUCCESS = "[PRODUCTS] Remove Product Success";
 export const REMOVE_PRODUCT_FAIL = "[PRODUCTS] Remove Product Fail";
+
+export const UPDATE_PRODUCT = "[PRODUCTS] Update Product";
+export const UPDATE_PRODUCT_SUCCESS = "[PRODUCTS] Update Product Success";
+export const UPDATE_PRODUCT_FAIL = "[PRODUCTS] Update Product Fail";
 
 
 export class LoadProducts implements Action {
@@ -54,6 +60,20 @@ export class RemoveProductFail implements Action {
   public readonly type: string = REMOVE_PRODUCT_FAIL;
 }
 
+export class UpdateProduct implements Action {
+  public readonly type: string = UPDATE_PRODUCT;
+  constructor(public payload: Product) {}
+}
+
+export class UpdateProductSuccess implements Action {
+  public readonly type: string = UPDATE_PRODUCT_SUCCESS;
+  constructor(public payload: Product) {}
+}
+
+export class UpdateProductFail implements Action {
+  public readonly type: string = UPDATE_PRODUCT_FAIL;
+}
+
 //action types
 
 export type ProductsAction =
@@ -65,4 +85,7 @@ export type ProductsAction =
   | AddProductFail
   | RemoveProduct
   | RemoveProductSuccess
-  | RemoveProductFail;
+  | RemoveProductFail
+  | UpdateProduct
+  | UpdateProductSuccess
+  | UpdateProductFail;

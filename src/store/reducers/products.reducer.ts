@@ -52,7 +52,7 @@ export function productsReducer(
         loaded: true
       };
 
-      case fromActions.REMOVE_PRODUCT:
+    case fromActions.REMOVE_PRODUCT:
       return {
         ...state,
         loading: false,
@@ -60,9 +60,28 @@ export function productsReducer(
       };
 
     case fromActions.REMOVE_PRODUCT_SUCCESS:
-    console.log(state.data.filter(product => product!== (<fromActions.RemoveProduct>action).payload));
       return {
-        data: state.data.filter(product => product!== (<fromActions.RemoveProduct>action).payload),
+        data: state.data.filter(product => product !== (<fromActions.RemoveProduct>action).payload),
+        loading: false,
+        loaded: true
+      };
+
+    case fromActions.UPDATE_PRODUCT:
+      return {
+        ...state,
+        loading: false,
+        loaded: true
+      };
+
+    case fromActions.UPDATE_PRODUCT_SUCCESS:
+      const payload = (<fromActions.RemoveProduct>action).payload;
+      return {
+        data: state.data.map(product => {
+          if (product._id === payload._id) {
+            return payload;
+          }
+          return product;
+        }),
         loading: false,
         loaded: true
       };
@@ -100,9 +119,9 @@ export const getProductById = (id: string) => {
   );
 };
 
-export const getNewProducts = createSelector(
+export const getPromoProducts = createSelector(
   getProducts,
-  (state: Product[]) => state.filter(product => product.newOffer)
+  (state: Product[]) => state.filter(product => product.promo)
 );
 
 export const getProductAvailableSizes = (id: string) => {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Product } from "src/models";
+import { Product, Category } from "src/models";
 import * as fromReducers from "src/store/reducers";
 import * as fromActions from "src/store/actions";
 import { Store } from "@ngrx/store";
@@ -15,13 +15,16 @@ import { Router } from "@angular/router";
 export class ProductAddComponent implements OnInit {
   private placeholder: string = "https://via.placeholder.com/150";
   private images: any[] = [];
+  private categories: string[];
 
   constructor(
     private store: Store<fromReducers.AppState>,
     private http: HttpService,
     private toastr: ToastrService,
     private router: Router
-    ) { }
+    ) {
+      this.categories = Object.keys(Category)
+    }
 
   ngOnInit() { }
 
@@ -39,12 +42,13 @@ export class ProductAddComponent implements OnInit {
   onSubmit(form) {
     console.log(form);
     const product: Product = {
+      // TODO: generate id
       _id: null,
       category: form.category,
       date: new Date().toISOString(),
       name: form.name,
       description: form.description,
-      newOffer: true,
+      promo: true,
       photos: this.images.map(img=>({url: img.url, thumbnail: false})),
       price: form.price,
       sizes: form.sizes.split(",").map(size => ({

@@ -2,8 +2,9 @@
   <div class="col-md-12">
     <a class="nav-link" [routerLink]="['/admin','add-product']">Dodaj produkt</a>
     <div class="list-group">
-      <a *ngFor="let product of products" class="list-group-item list-group-item-action flex-column align-items-start"
-        [routerLink]="['/product', product._id]">
+      <a *ngFor="let product of products" class="list-group-item list-group-item-action flex-column align-items-start">
+        <!-- <a *ngFor="let product of products" class="list-group-item list-group-item-action flex-column align-items-start"
+        [routerLink]="['/product', product._id]"> -->
         <div class="d-flex w-100 justify-content-between">
           <h5 class="mb-1">{{product.name}}</h5>
           <small>{{product.date | date: 'dd-MM-yyyy H:mm'}}</small>
@@ -18,7 +19,12 @@
         </div>
         <div class="row">
           <div class="col-md-12">
-            <button class="btn btn-danger float-right" (click)="onDelete(product)">Kasuj</button>
+            <div class="btn-group float-right" role="group">
+              <button class="btn btn-primary" [routerLink]="['/product', product._id]">Zobacz</button>
+              <button class="btn btn-success" (click)="onTogglePromo(product)" *ngIf="!product.promo">Promocja</button>
+              <button class="btn btn-warning" (click)="onTogglePromo(product)" *ngIf="product.promo">Wycofaj z promocji</button>
+              <button class="btn btn-danger" (click)="onDelete(product)">Kasuj</button>
+            </div>
           </div>
         </div>
       </a>

@@ -11,7 +11,7 @@ export interface Product{
   price: number;
   date: string;
   category: Category;
-  newOffer: boolean;
+  promo: boolean;
   choosenSize?: string;
   choosenId?: string;
 }

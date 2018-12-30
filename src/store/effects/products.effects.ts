@@ -25,7 +25,7 @@ export class ProductsEffects {
     );
 
   @Effect()
-  addProducts: Observable<Action> = this.actions
+  addProduct: Observable<Action> = this.actions
     .ofType(fromActions.ADD_PRODUCT)
     .pipe(
       switchMap(action => {
@@ -39,7 +39,21 @@ export class ProductsEffects {
     );
 
   @Effect()
-  removeProducts: Observable<Action> = this.actions
+  updateProduct: Observable<Action> = this.actions
+    .ofType(fromActions.UPDATE_PRODUCT)
+    .pipe(
+      switchMap(action => {
+        const _action = <fromActions.UpdateProduct>action;
+        return this.productsService
+          .post(HttpService.productsRoute, _action.payload, {
+            responseType: "text"
+          })
+          .pipe(mapTo(new fromActions.UpdateProductSuccess(_action.payload)));
+      })
+    );
+
+  @Effect()
+  removeProduct: Observable<Action> = this.actions
     .ofType(fromActions.REMOVE_PRODUCT)
     .pipe(
       switchMap(action => {
