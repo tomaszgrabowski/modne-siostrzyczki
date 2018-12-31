@@ -6,6 +6,7 @@ import { Store } from "@ngrx/store";
 import { HttpService } from "src/app/services/httpService";
 import { ToastrService } from "ngx-toastr";
 import { Router } from "@angular/router";
+import { v4 as uuid } from 'uuid';
 
 @Component({
   selector: "app-product-add",
@@ -13,7 +14,6 @@ import { Router } from "@angular/router";
   styleUrls: ["./product-add.component.css"]
 })
 export class ProductAddComponent implements OnInit {
-  private placeholder: string = "https://via.placeholder.com/150";
   private images: any[] = [];
   private categories: string[];
 
@@ -40,10 +40,8 @@ export class ProductAddComponent implements OnInit {
   }
 
   onSubmit(form) {
-    console.log(form);
     const product: Product = {
-      // TODO: generate id
-      _id: null,
+      _id: uuid(),
       category: form.category,
       date: new Date().toISOString(),
       name: form.name,
@@ -56,6 +54,7 @@ export class ProductAddComponent implements OnInit {
         reserved: false
       }))
     };
+    console.log(product);
     product.photos[0].thumbnail = true;
     this.store.dispatch(new fromActions.AddProduct(product));
     this.router.navigate(['admin','list']);

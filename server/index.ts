@@ -1,6 +1,6 @@
 import * as express from "express";
 import * as jwt from "jsonwebtoken";
-import { MongoClient, ObjectID, ObjectId } from "mongodb";
+import { MongoClient } from "mongodb";
 import * as cors from "cors";
 import { HttpService } from "../src/app/services/httpService";
 import { Collections } from "./collections";
@@ -106,7 +106,8 @@ export class Server {
                   res.sendStatus(403);
                 } else {
                   db.collection(Collections.Products)
-                    .replaceOne({ _id: req.body._id }, req.body)
+                  .insertOne(req.body)
+                    //.replaceOne({ id: req.body.id }, req.body)
                     .then(() => {
                       res.sendStatus(201);
                     });
@@ -123,7 +124,7 @@ export class Server {
                   res.sendStatus(403);
                 } else {
                   db.collection(Collections.Products)
-                    .deleteOne({ "_id": new ObjectId(req.params.id) });
+                    .deleteOne({ "_id": req.params._id });
                   res.sendStatus(202);
                 }
               });

@@ -4,8 +4,7 @@ import { Observable } from "rxjs";
 import * as fromReducers from "src/store/reducers";
 import * as fromActions from "src/store/actions";
 import {
-  getPromoProducts,
-  getProducts
+  getPromoProducts
 } from "src/store/reducers/products.reducer";
 import { Product } from "src/models";
 
